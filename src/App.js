@@ -1,15 +1,26 @@
 import React from 'react';
-import './App.css';
+import {Grommet, Text} from 'grommet';
+import "./styles.scss";
+
+const theme = {
+  global: {
+    font: {
+      family: 'Roboto',
+      size: '14px',
+      height: '20px',
+    },
+  },
+};
 
 function App() {
   return (
-    <div className="App">
+    <Grommet theme={theme}>
       <header className="App-header">
-        <p>
+        <Text>
           Welcome to server-state!
-        </p>
+        </Text>
       </header>
-    </div>
+    </Grommet>
   );
 }
 
