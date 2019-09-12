@@ -1,6 +1,22 @@
 import React from 'react';
 import {Grommet, Text} from 'grommet';
 import "./styles.scss";
+import Dashboard from './components/dashboard';
+
+const config = [
+  [
+    {
+      component: 'raw',
+      path: 'raw'
+    }
+  ],
+  [
+    {
+      component: 'raw',
+      path: 'raw2'
+    }
+  ]
+];
 
 const theme = {
   global: {
@@ -15,11 +31,7 @@ const theme = {
 function App() {
   return (
     <Grommet theme={theme}>
-      <header className="App-header">
-        <Text>
-          Welcome to server-state!
-        </Text>
-      </header>
+      <Dashboard config={config}></Dashboard>
     </Grommet>
   );
 }
