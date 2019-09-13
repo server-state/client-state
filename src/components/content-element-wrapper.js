@@ -10,7 +10,7 @@ export default class ContentElementWrapper extends React.Component {
         this.state = {data: null, error: null, component: null};
 
         if (!elementComponents[this.props.element.component]) {
-            this.state.error = 'Clientside module not found!';
+            this.state.error = 'Client-side module not found!';
         } else {
             this.state.component = elementComponents[this.props.element.component];
 
@@ -26,9 +26,14 @@ export default class ContentElementWrapper extends React.Component {
 
     render() {
         if (this.state.data) {
-            return <this.state.component data={this.state.data} />;
+            return <Box flex={true} asis='full' pad='medium' overflow='auto' elevation='small'>
+                <Heading level={3}>
+                    {this.props.element.path}
+                </Heading>
+                <this.state.component data={this.state.data} />
+            </Box>;
         } else if (this.state.error) {
-            return <Box background="status-error">
+            return <Box background={'status-error'}>
                 <Heading level={3}>
                     Error
                 </Heading>
@@ -37,7 +42,7 @@ export default class ContentElementWrapper extends React.Component {
                 </Paragraph>
             </Box>;
         } else {
-            return <Meter values={[{value: 60}]}></Meter>;
+            return <Meter values={[{value: 60}]}/>; // TODO: Add spinner
         }
     }
 }
