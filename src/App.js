@@ -5,6 +5,8 @@ import Dashboard from './components/dashboard';
 import {Refresh, SettingsOption} from "grommet-icons";
 import PreferencesPopup from "./components/preferences";
 
+import theme from './config/server-state-alt.theme';
+
 const config = [
     [
         {
@@ -28,46 +30,12 @@ const config = [
     ]
 ];
 
-let theme = {
-    global: {
-        font: {
-            family: 'Roboto',
-            size: '14px',
-            height: '20px',
-        },
-    },
-};
-
-theme = {
-    "name": "server-state",
-    "rounding": 4,
-    "spacing": 24,
-    "global": {
-        "colors": {
-            "brand": "#b3b3b3",
-            "accent-1": "#008575",
-            "accent-2": "#008575",
-            "accent-3": "#008575",
-            "accent-4": "#008575",
-            "neutral-1": "#e6e6e6",
-            "neutral-2": "#b3b3b3",
-            "neutral-3": "#808080",
-            "neutral-4": "#000"
-        },
-        "font": {
-            "family": "Libre Franklin",
-            size: '14px',
-            height: '20px',
-        }
-    }
-};
-
 function App() {
     const [preferencesOpen, setPreferencesOpen] = React.useState();
     return (
         <Grommet theme={theme}>
             <Box>
-                <Box align="center" justify="between" direction="row" flex={false} elevation='medium'
+                <Box align="center" justify="between" direction="row" flex={false} elevation='small'
                      pad="small">
                     <PreferencesPopup open={preferencesOpen} onClose={() => setPreferencesOpen(false)}/>
                     <Heading margin={'medium'} size={'small'}>

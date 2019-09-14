@@ -15,7 +15,8 @@ export default function PreferencesPopup(props) {
                     <Form>
                         <FormField name={'baseUrl'} label={'Server Base URL'}/>
                         <CheckBox label={'Server requires authentication'}/>
-                        <Button type={'submit'} primary label={'Save'}/>
+                        <br />
+                        <Button onClick={props.onClose} type={'submit'} primary label={'Save'}/>
                     </Form>
                 </Box>
             </Layer>
