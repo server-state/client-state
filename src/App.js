@@ -14,6 +14,12 @@ const config = [
             path: 'raw2'
         }
     ],
+    [
+        {
+            component: 'lineChart',
+            path: 'xy'
+        }
+    ]
 ];
 
 const theme = {

@@ -4,9 +4,6 @@ const baseURL = 'http://localhost:8080/api/v1/';
 
 function get(url) {
     return Axios.get(baseURL + url, {
-        /* headers: {
-            "Cache-Control": "no-cache"
-        } */
     });
 }
 
