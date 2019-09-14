@@ -3,6 +3,7 @@ import {Box, Button, Grommet, Heading} from 'grommet';
 import "./styles.scss";
 import Dashboard from './components/dashboard';
 import {Refresh, SettingsOption} from "grommet-icons";
+import PreferencesPopup from "./components/preferences";
 
 const config = [
     [
@@ -62,20 +63,24 @@ theme = {
 };
 
 function App() {
+    const [preferencesOpen, setPreferencesOpen] = React.useState();
     return (
         <Grommet theme={theme}>
-            <Box align="center" justify="between" direction="row" flex={false} background={{"color": "accent-1"}}
-                 pad="small">
-                <Heading>
-                    Server State
-                </Heading>
-                <Box align="center" justify="center" pad="small" direction="row" gap="small">
-                    <Button label="Preferences" color={'brand'} icon={<SettingsOption/>}/>
-                    <Button label="Refresh" color={'brand'} icon={<Refresh/>}/>
+            <Box>
+                <Box align="center" justify="between" direction="row" flex={false} elevation='medium'
+                     pad="small">
+                    <PreferencesPopup open={preferencesOpen} onClose={() => setPreferencesOpen(false)}/>
+                    <Heading margin={'medium'} size={'small'}>
+                        Server State
+                    </Heading>
+                    <Box align="center" justify="center" pad="small" direction="row" gap="small">
+                        <Button label="Preferences" onClick={() => setPreferencesOpen(true)} icon={<SettingsOption/>}/>
+                        <Button label="Refresh" icon={<Refresh/>}/>
+                    </Box>
                 </Box>
-            </Box>
-            <Box align={'center'}>
-                <Dashboard config={config}/>
+                <Box align={'center'}>
+                    <Dashboard config={config}/>
+                </Box>
             </Box>
         </Grommet>
     );
