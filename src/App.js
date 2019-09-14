@@ -18,6 +18,10 @@ const config = [
         {
             component: 'lineChart',
             path: 'xy'
+        },
+        {
+            component: 'treeMap',
+            path: 'hierarchical'
         }
     ]
 ];
