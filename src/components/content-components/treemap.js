@@ -13,7 +13,7 @@ export default function TreeMap(props) {
             data={props.data}
             height={300}
             padding={10}
-            getSize={d => d.value}
+            getSize={d => d.size}
             mode={'partition'}
             renderMode={'DOM'}
         />
