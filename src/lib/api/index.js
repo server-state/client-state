@@ -1,9 +1,13 @@
 import Axios from "axios";
 
-const baseURL = 'http://localhost:8080/api/v1/';
+const baseURL = 'https://localhost:4434/api/v1/';
 
 function get(url) {
-    return Axios.get(baseURL + url, {
+    if (!url.startsWith('http://') && !url.startsWith('https://')) {
+        url = baseURL + url;
+    }
+
+    return Axios.get(url, {
     });
 }
 

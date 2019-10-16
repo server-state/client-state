@@ -17,16 +17,16 @@ const config = [
             component: 'raw',
             path: 'raw2'
         }
-    ],
-    [
-        {
-            component: 'lineChart',
-            path: 'xy'
-        },
-        {
-            component: 'treeMap',
-            path: 'hierarchical'
-        }
+    //],
+    //[
+    //   {
+    //        component: 'lineChart',
+    //        path: 'xy'
+    //    },
+    //    {
+    //        component: 'treeMap',
+    //        path: 'hierarchical'
+    //    }
     ]
 ];
 
