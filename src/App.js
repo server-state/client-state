@@ -1,46 +1,74 @@
 import React from 'react';
-import './App.css';
-import Button from "@material-ui/core/Button";
+import { ThemeProvider } from '@material-ui/styles';
+
+import theme from './theme';
+import Header from './components/header';
 import Dashboard from "./components/dashboard";
-import {Toolbar, Typography} from "@material-ui/core";
-import AppBar from "@material-ui/core/AppBar";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
+
 
 const config = [
-    [
-        {
-            component: 'raw',
-            path: 'raw'
-        },
-        {
-            component: 'raw',
-            path: 'raw2'
-        }
-    ]
+    {
+        title: "Dashboard",
+        rows: [
+            [
+                {
+                    name: "Raw Element 1",
+                    component: 'raw',
+                    path: 'raw',
+                    fullWidth: true
+                },
+                {
+                    name: "Raw Element 2",
+                    component: 'raw',
+                    path: 'raw2'
+                },
+                {
+                    name: "Law Element 1",
+                    component: 'raw',
+                    path: 'raw',
+                    fullWidth: true
+                },
+                {
+                    name: "Law Element 2",
+                    component: 'raw',
+                    path: 'raw2'
+                }
+            ],
+            [
+                {
+                    name: "aw Element 1",
+                    component: 'raw',
+                    path: 'raw',
+                    fullWidth: true
+                },
+                {
+                    name: "aw Element 2",
+                    component: 'raw',
+                    path: 'raw2'
+                },
+                {
+                    name: "Äaw Element 1",
+                    component: 'raw',
+                    path: 'raw',
+                    fullWidth: true
+                },
+                {
+                    name: "ßaw Element 2",
+                    component: 'raw',
+                    path: 'raw2ß'
+                }
+            ]
+        ]
+    }
 ];
 
-function App() {
-    return (
-        <>
-            <AppBar>
-                <Toolbar color={'primary'}>
-                    <IconButton edge={'start'} color={'inherit'}>
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography variant={'h6'}>
-                        Server State
-                    </Typography>
-
-                </Toolbar>
-            </AppBar>
-            <Dashboard config={config}/>
-
-            <Button variant="contained" color="primary">
-                Test
-            </Button>
-        </>
-    );
+export default class App extends React.Component {
+    render() {
+        return (
+            <ThemeProvider theme={theme}>
+                <Header title={config[0].title} />
+                <Dashboard config={config[0]}/>
+            </ThemeProvider>
+        );
+    }
 }
-
-export default App;

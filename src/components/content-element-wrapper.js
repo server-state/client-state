@@ -1,14 +1,19 @@
 import React from 'react';
+import { Card, CardHeader, CardContent, IconButton, Divider, Link, LinearProgress, Typography } from '@material-ui/core';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+
 import elementComponents from '../config/component-registry';
-import {module} from '../lib/api';
-import Card from "@material-ui/core/Card";
-import {CircularProgress} from "@material-ui/core";
+import { module, fullURL } from '../lib/api';
+import ElementAvatar from './element-avatar';
 
 export default class ContentElementWrapper extends React.Component {
     constructor(props) {
         super(props);
         this.props = props;
-        this.state = {data: null, error: null, component: null};
+        this.state = { data: null, error: null, component: null };
+
+        //this.state.error = "Help me please!";
+        //this.state.data = "Some weird data.";
 
         if (!elementComponents[this.props.element.component]) {
             this.state.error = 'Client-side module not found!';
@@ -17,35 +22,66 @@ export default class ContentElementWrapper extends React.Component {
 
             module(props.element.path).then((res) => {
                 console.log(res); // REMOVE IN PRODUCTION BUILD !!!
-                this.setState({data: res.data});
+                this.setState({ data: res.data });
             }).catch((e) => {
-                this.setState({error: 'Could not be loaded!'});
+                this.setState({ error: 'Could not be loaded!' });
                 console.warn(e);
             });
         }
     }
 
-    render() {
+    renderModuleContent() {
+        // if everything goes right, give FEM data and render it
         if (this.state.data) {
-            return <Card>
-                <h3>
-                    {this.props.element.path}
-                </h3>
-                <this.state.component data={this.state.data}/>
-            </Card>;
+            return (
+                <this.state.component data={this.state.data} minWidth={100}/>
+            );
+
+            // if an error occured, render the Error message
         } else if (this.state.error) {
             return (
-                <Card>
-                    <h3>
+                <>
+                    <Typography variant={'h5'} color={'error'}>
                         Error
-                    </h3>
-                    <p>
+                        </Typography>
+                    <Typography variant={'body1'} color={'error'}>
                         {this.state.error}
-                    </p>
-                </Card>
+                    </Typography>
+                </>
             );
+            // else render a Linear Indeterminate
         } else {
-            return <CircularProgress />; // TODO: Add spinner
+            return (<LinearProgress />);
         }
+    }
+
+    render() {
+        const name = this.props.element.name;
+        const path = this.props.element.path;
+
+        return (
+            <Card>
+                <CardHeader
+                    avatar={
+                        <ElementAvatar name={name} />
+                    }
+                    action={
+                        <IconButton aria-label="expand">
+                            <MoreVertIcon />
+                        </IconButton>
+                    }
+                    title={this.props.element.name}
+                    subheader={
+                        <Link href={fullURL(path)} color={'inherit'}>
+                            {path}
+                        </Link>
+                    } />
+
+                <Divider light="true" variant="middle" />
+                <CardContent>
+                    {this.renderModuleContent()}
+                </CardContent>
+            </Card>
+        );
     }
 }

@@ -1,15 +1,28 @@
 import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import ContentElementWrapper from './content-element-wrapper';
-import Grid from "@material-ui/core/Grid";
+import { Box, Grid } from "@material-ui/core";
 
-export default class ContentRow extends React.Component {
-    render() {
-        return <Grid container spacing={2} direction='row' pad='small' gap='small'>
-            {this.props.row.map((element, i) =>
-                <Grid item>
-                    <ContentElementWrapper element={element} key={i}/>
-                </Grid>
-            )}
-        </Grid>;
+
+const useStyles = makeStyles(theme => ({
+    element: {
+        maxWidth: 600,
+        minWidth: 0
     }
+}));
+
+export default function ContentRow(props) {
+    const classes = useStyles();
+
+    return (
+        <Box px={1} py={2}>
+            <Grid container spacing={2} direction={'row'} justify={'center'} pad={'small'} gap={'small'}>
+                {props.row.map((element, index) =>
+                    <Grid item xs={12} sm={6} className={classes.element}>
+                        <ContentElementWrapper element={element} key={index} />
+                    </Grid>
+                )}
+            </Grid>
+        </Box>
+    );
 }
