@@ -1,24 +1,25 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import ContentElementWrapper from './content-element-wrapper';
-import { Box, Grid } from "@material-ui/core";
+import {Box, Grid} from "@material-ui/core";
 
 
 const useStyles = makeStyles(() => ({
     element: {
         minWidth: 0
-    }
+    },
 }));
 
 export default function ContentRow(props) {
     const classes = useStyles();
 
     return (
-        <Box px={1} py={1}>
-            <Grid container spacing={2} direction={'row'} alignItems={'stretch'} justify={'center'} pad={'small'} gap={'small'}>
+        <Box py={1}>
+            <Grid container spacing={2} direction={'row'} alignItems={'stretch'} justify={'center'} pad={'small'}
+                  gap={'small'}>
                 {props.elements.map((element, index) =>
                     <Grid item xs={12} sm={element.width} className={classes.element}>
-                        <ContentElementWrapper element={element} key={index} />
+                        <ContentElementWrapper element={element} key={index}/>
                     </Grid>
                 )}
             </Grid>
