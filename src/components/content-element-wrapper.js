@@ -12,9 +12,6 @@ export default class ContentElementWrapper extends React.Component {
         this.props = props;
         this.state = { data: null, error: null, component: null };
 
-        //this.state.error = "Help me please!";
-        //this.state.data = "Some weird data.";
-
         if (!elementComponents[this.props.element.component]) {
             this.state.error = 'Client-side module not found!';
         } else {
@@ -37,7 +34,7 @@ export default class ContentElementWrapper extends React.Component {
                 <this.state.component data={this.state.data} minWidth={100}/>
             );
 
-            // if an error occured, render the Error message
+            // if an error occurred, render the Error message
         } else if (this.state.error) {
             return (
                 <>
@@ -60,7 +57,7 @@ export default class ContentElementWrapper extends React.Component {
         const path = this.props.element.path;
 
         return (
-            <Card>
+            <Card style={{'height': '100%'}}>
                 <CardHeader
                     avatar={
                         <ElementAvatar name={name} />
