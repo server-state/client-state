@@ -4,7 +4,7 @@ import {
     MoreVert as MoreVertIcon
 } from '@material-ui/icons';
 
-import SecondaryTooltip from './secondary-tooltip';
+import SecondaryTooltip from '../secondary-tooltip';
 
 // given options
 const options = [

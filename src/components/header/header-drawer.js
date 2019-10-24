@@ -3,7 +3,7 @@ import { IconButton, SwipeableDrawer, List, ListItem, ListItemText } from '@mate
 import MenuIcon from '@material-ui/icons/Menu';
 import { makeStyles } from '@material-ui/core/styles';
 
-import SecondaryTooltip from './secondary-tooltip';
+import SecondaryTooltip from '../secondary-tooltip';
 
 
 const useStyles = makeStyles(theme => ({
@@ -22,7 +22,7 @@ export default function HeaderDrawer(props) {
     const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 
     // simple react state for open/close behaviour
-    const [state, setState] = React.useState(null);
+    const [state, setState] = React.useState(false);
     const toggleDrawer = newState => event => {
         if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;

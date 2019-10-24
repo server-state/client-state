@@ -2,7 +2,7 @@ import React from 'react';
 import {ThemeProvider} from '@material-ui/styles';
 
 import theme from './theme';
-import Header from './components/header';
+import Header from './components/header/';
 import Dashboard from "./components/dashboard";
 
 
@@ -81,8 +81,8 @@ export default class App extends React.Component {
                     dense={false}
                     
                     onDrawerSelected={(element) => alert(element)}
-                    onToggleEdit={(element) => alert('Toggle edit')}
-                    onRefresh={(element) => alert('Refresh')}
+                    onToggleEdit={() => console.log('Toggle edit')}
+                    onRefresh={() => console.log('Refresh please')}
                     onMenuSelected={(element) => alert(element)}
                 />
                 <Dashboard config={this.state.config[0]}/>
