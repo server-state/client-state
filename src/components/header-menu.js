@@ -1,8 +1,17 @@
 import React from 'react';
-import { IconButton, Menu, MenuItem } from '@material-ui/core';
+import { IconButton, Menu, MenuItem, Tooltip } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 import {
     MoreVert as MoreVertIcon
 } from '@material-ui/icons';
+
+const SecondaryTooltip = withStyles(theme => ({
+    tooltip: {
+        backgroundColor: theme.palette.secondary.main,
+        boxShadow: theme.shadows[1],
+        color: 'rgba(0, 0, 0, 0.87)'
+    }
+}))(Tooltip);
 
 // given options
 const options = [
@@ -34,13 +43,15 @@ export default function HeaderMenu(props) {
 
     return (
         <div>
-            <IconButton
-                edge="end"
-                color="inherit"
-                onClick={handleClick}
-            >
-                <MoreVertIcon />
-            </IconButton>
+            <SecondaryTooltip title="Menu">
+                <IconButton
+                    edge="end"
+                    color="inherit"
+                    onClick={handleClick}
+                >
+                    <MoreVertIcon />
+                </IconButton>
+            </SecondaryTooltip>
             <Menu
                 id="header-menu"
                 anchorEl={anchorEl}

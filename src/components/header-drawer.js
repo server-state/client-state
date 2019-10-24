@@ -1,8 +1,16 @@
 import React from 'react';
-import { IconButton, SwipeableDrawer, List, ListItem, ListItemText } from '@material-ui/core';
+import { IconButton, SwipeableDrawer, List, ListItem, ListItemText, Tooltip } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 
+
+const SecondaryTooltip = withStyles(theme => ({
+    tooltip: {
+        backgroundColor: theme.palette.secondary.main,
+        boxShadow: theme.shadows[1],
+        color: 'rgba(0, 0, 0, 0.87)'
+    }
+}))(Tooltip);
 
 const useStyles = makeStyles(theme => ({
     menuButtonLeft: {
@@ -55,15 +63,18 @@ export default function HeaderDrawer(props) {
 
     return (
         <div>
-            <IconButton
-                edge="start"
-                className={classes.menuButtonLeft}
-                color="inherit"
-                aria-label="menu"
-                onClick={toggleDrawer(true)}
-            >
-                <MenuIcon />
-            </IconButton>
+            <SecondaryTooltip title="Dashboards">
+                <IconButton
+                    edge="start"
+                    className={classes.menuButtonLeft}
+                    color="inherit"
+                    aria-label="menu"
+                    onClick={toggleDrawer(true)}
+                >
+                    <MenuIcon />
+                </IconButton>
+            </SecondaryTooltip>
+
             <SwipeableDrawer
                 open={state}
                 onClose={toggleDrawer(false)}
