@@ -15,8 +15,15 @@ export default function ContentRow(props) {
 
     return (
         <Box py={1}>
-            <Grid container spacing={2} direction={'row'} alignItems={'stretch'} justify={'center'} pad={'small'}
-                  gap={'small'}>
+            <Grid
+                container
+                spacing={2}
+                direction={'row'}
+                alignItems={'stretch'}
+                justify={'center'}
+                pad={'small'}
+                gap={'small'}
+            >
                 {props.elements.map((element, index) =>
                     <Grid item xs={12} sm={element.width} className={classes.element}>
                         <ContentElementWrapper element={element} key={index}/>

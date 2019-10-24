@@ -23,4 +23,4 @@ export default function SecondaryTooltip(props) {
             {props.children}
         </ModifiedTooltip>
     );
-} 
+}

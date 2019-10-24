@@ -10,12 +10,22 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
+function generateAvaterSign(name) {
+    const firstLetter = name.charAt(0);
+    switch (firstLetter) {
+        case 'ß':
+            return 'ß';
+        default:
+            return firstLetter.toUpperCase();
+    }
+}
+
 export default function ElementAvatar(props) {
     const classes = useStyles();
 
     return (
         <Avatar aria-label="recipe" className={classes.avatar}>
-            {props.name.charAt(0).toUpperCase()}
+            {generateAvaterSign(props.name)}
         </Avatar>
     );
 }

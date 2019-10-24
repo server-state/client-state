@@ -8,7 +8,7 @@ import SecondaryTooltip from '../secondary-tooltip';
 
 // given options
 const options = [
-    'Settings',
+    'Preferences',
     'Reload',
     'About'
 ];
