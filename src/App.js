@@ -6,38 +6,38 @@ import Header from './components/header';
 import Dashboard from "./components/dashboard";
 
 
-const config = [
+const defaultConfig = [
     {
         title: "Dashboard",
         contents: [
             {
-                name: "Raw Element 1",
+                name: "Raw 1",
                 component: 'raw',
                 path: 'raw',
                 width: 12
             },
             {
-                name: "Raw Element 2",
+                name: "Raw 2",
                 component: 'raw',
                 path: 'raw2',
                 width: 6
             },
             {
-                name: "Law Element 1",
+                name: "Systemd Raw",
                 component: 'raw',
-                path: 'raw',
+                path: 'systemd',
                 width: 6,
             },
             {
-                name: "Law Element 2",
+                name: "System Info Raw",
                 component: 'raw',
-                path: 'raw2',
+                path: 'system-info',
                 width: 4
             },
             {
-                name: "ßaw Element 2",
+                name: "Disk Usage Raw",
                 component: 'raw',
-                path: 'raw2ß',
+                path: 'disk-usage',
                 width: 8
             }
         ]
@@ -45,11 +45,47 @@ const config = [
 ];
 
 export default class App extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            config: defaultConfig,
+            dashboards: ['Dashboard', 'Dashboard2']
+        };
+    }
+
+    updateConfig(config) {
+        this.setState({
+            config: Object.assign([], this.state.config, config)
+        });
+
+        let dashboards = [];
+
+        for (const dashboard of this.state.config) {
+            dashboards.push(dashboard.title);
+        }
+
+        this.setState({
+            dashboards: dashboards
+        });
+
+        console.log(JSON.stringify(this.state, null, 2));
+    }
+
     render() {
         return (
             <ThemeProvider theme={theme}>
-                <Header title={config[0].title}/>
-                <Dashboard config={config[0]}/>
+                <Header 
+                    dashboards={this.state.dashboards}
+                    title={this.state.config[0].title}
+                    dense={false}
+                    
+                    onDrawerSelected={(element) => alert(element)}
+                    onToggleEdit={(element) => alert('Toggle edit')}
+                    onRefresh={(element) => alert('Refresh')}
+                    onMenuSelected={(element) => alert(element)}
+                />
+                <Dashboard config={this.state.config[0]}/>
             </ThemeProvider>
         );
     }

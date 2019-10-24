@@ -6,19 +6,17 @@ import { AppBar, Toolbar, Typography, IconButton } from '@material-ui/core';
 
 // used icons
 import {
-    Menu as MenuIcon,
-    MoreVert as MoreVertIcon,
     Refresh as RefreshIcon,
     ViewQuilt as ViewQuiltIcon,
 } from '@material-ui/icons';
+
+import HeaderDrawer from './header-drawer';
+import HeaderMenu from './header-menu';
 
 // pre-defined style
 const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1
-    },
-    menuButtonLeft: {
-        marginRight: theme.spacing(2)
     },
     menuButtonMiddle: {
         marginRight: theme.spacing(2),
@@ -42,35 +40,42 @@ export default function Header(props) {
     return (
         <div className={classes.root}>
             <AppBar position="static">
-                <Toolbar variant="regular">
-                    <IconButton
-                        edge="start"
-                        className={classes.menuButtonLeft}
-                        color="inherit"
-                        aria-label="menu">
-                            <MenuIcon />
-                    </IconButton>
+                <Toolbar variant={props.dense ? 'dense' : 'regular'}>
+                    <HeaderDrawer
+                        dashboards={props.dashboards}
+                        selected={props.title}
+                        dense={props.dense}
+
+                        onDrawerSelected={props.onDrawerSelected}
+                    />
                     
-                    <Typography variant="h6" className={classes.title}>
+                    {/* Header text */}
+                    <Typography
+                        variant="h6"
+                        className={classes.title}
+                    >
                         {props.title}
                     </Typography>
 
+                    {/* Header action buttons */}
                     <IconButton
                         color="inherit"
-                        aria-label="none">
+                        aria-label="none"
+                        onClick={props.onToggleEdit}
+                    >
                             <ViewQuiltIcon />
                     </IconButton>
                     <IconButton
                         color="inherit"
-                        aria-label="none">
+                        aria-label="none"
+                        onClick={props.onRefresh}
+                    >
                             <RefreshIcon />
                     </IconButton>
-                    <IconButton
-                        edge="end"
-                        color="inherit"
-                        aria-label="more options">
-                            <MoreVertIcon />
-                    </IconButton>
+                    
+                    <HeaderMenu
+                        onMenuSelected={props.onMenuSelected}
+                    />
                 </Toolbar>
             </AppBar>
         </div>
