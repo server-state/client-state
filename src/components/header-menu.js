@@ -1,17 +1,10 @@
 import React from 'react';
-import { IconButton, Menu, MenuItem, Tooltip } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
+import { IconButton, Menu, MenuItem } from '@material-ui/core';
 import {
     MoreVert as MoreVertIcon
 } from '@material-ui/icons';
 
-const SecondaryTooltip = withStyles(theme => ({
-    tooltip: {
-        backgroundColor: theme.palette.secondary.main,
-        boxShadow: theme.shadows[1],
-        color: 'rgba(0, 0, 0, 0.87)'
-    }
-}))(Tooltip);
+import SecondaryTooltip from './secondary-tooltip';
 
 // given options
 const options = [

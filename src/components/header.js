@@ -1,8 +1,8 @@
 import React from 'react';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
 
 // Material-UI imports
-import { AppBar, Toolbar, Typography, IconButton, Tooltip } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, IconButton } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
 // used icons
 import {
@@ -12,6 +12,8 @@ import {
 
 import HeaderDrawer from './header-drawer';
 import HeaderMenu from './header-menu';
+import SecondaryTooltip from './secondary-tooltip';
+
 
 // pre-defined style
 const useStyles = makeStyles(theme => ({
@@ -34,13 +36,6 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const SecondaryTooltip = withStyles(theme => ({
-    tooltip: {
-        backgroundColor: theme.palette.secondary.main,
-        boxShadow: theme.shadows[1],
-        color: 'rgba(0, 0, 0, 0.87)'
-    }
-}))(Tooltip);
 
 export default function Header(props) {
     const classes = useStyles();
