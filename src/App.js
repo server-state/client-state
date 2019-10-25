@@ -11,6 +11,12 @@ const defaultConfig = [
         title: "Dashboard",
         contents: [
             {
+                name: "Systemd Static",
+                component: 'systemd',
+                path: 'systemd',
+                width: 12
+            },
+            {
                 name: "Raw 1",
                 component: 'raw',
                 path: 'raw',

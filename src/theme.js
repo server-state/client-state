@@ -1,4 +1,4 @@
-import {amber, blueGrey, red} from '@material-ui/core/colors';
+import {amber, blueGrey, red, green, orange} from '@material-ui/core/colors';
 import {createMuiTheme} from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
@@ -11,8 +11,20 @@ const theme = createMuiTheme({
             main: amber['500']
         },
         error: {
-            main: red.A400
+            main: red.A400,
         },
+        success: {
+            main: green.A700,
+            text: 'black'
+        },
+        failed: {
+            main: red.A700,
+            text: 'black'
+        },
+        warning: {
+            main: orange.A700,
+            text: 'black'
+        }
     }
 });
 
