@@ -16,7 +16,7 @@ export default function SecondaryTooltip(props) {
     return (
         <ModifiedTooltip 
             title={props.title}
-            enterDelay={500}
+            enterDelay={0}
             TransitionComponent={Fade}
             TransitionProps={{ timeout: 600 }}
         >
