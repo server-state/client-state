@@ -20,7 +20,7 @@ const SystemdBadge = withStyles(theme => ({
             border: props => props.color
                 ? `1px solid ${theme.palette[props.color].main}`
                 : `1px solid ${theme.palette.disabled.main}`,
-            content: props => props.color !== 'disabled' ? '""' : ''
+            content: props => props.color !== 'disabled' && props.color !== 'success' ? '""' : ''
         }
     },
     '@keyframes ripple': {
@@ -29,7 +29,7 @@ const SystemdBadge = withStyles(theme => ({
             opacity: 1
         },
         '100%': {
-            transform: 'scale(2.0)',
+            transform: 'scale(2.4)',
             opacity: 0
         }
     }

@@ -1,107 +1,27 @@
 import React from 'react';
-import {
-    makeStyles,
-    List, ListItem, ListItemAvatar, ListItemText, ListItemSecondaryAction,
-    Avatar,
-    IconButton
-} from '@material-ui/core';
-import {
-    SettingsApplications as SettingsApplicationsIcon,
-    ChatOutlined as ChatOutlinedIcon,
-    Feedback as FeedbackIcon
-} from '@material-ui/icons';
+import PropTypes from 'prop-types';
+import { List } from '@material-ui/core';
 
-import SystemdBadge from './systemd-badge';
+import SystemdListItem from './systemd-list-item';
 
 
-const useStyles = makeStyles(theme => ({
-    avatar: {
-        backgroundColor: theme.palette.primary.main
-    },
-    text: {
-        marginRight: theme.spacing(2),
-        wordBreak: 'break-all'
+function Systemd(props) {
+    let units = [];
+    for (const unitName in props.data) {
+        units.push(
+            <SystemdListItem unitName={unitName} unitInfos={props.data[unitName]} />
+        );
     }
-}));
 
-
-export default function Systemd(props) {
-    const classes = useStyles();
-    
     return (
         <List disablePadding>
-            <ListItem>
-                <ListItemAvatar>
-                    <SystemdBadge
-                        overlap="circle"
-                        anchorOrigin={{
-                            vertical: 'bottom',
-                            horizontal: 'right'
-                        }}
-                        variant="dot"
-
-                        color={'error'}
-                        size={12}
-                    >
-                        <Avatar className={classes.avatar}>
-                            <SettingsApplicationsIcon />
-                        </Avatar>
-                    </SystemdBadge>
-                </ListItemAvatar>
-
-                <ListItemText
-                    primary={
-                        'lightdm'
-                    }
-
-                    secondary={
-                        'service'
-                    }
-                />
-
-                <ListItemSecondaryAction>
-                    <IconButton>
-                        <FeedbackIcon />
-                    </IconButton>
-                </ListItemSecondaryAction>
-            </ListItem>
-
-            <ListItem>
-                <ListItemAvatar>
-                    <SystemdBadge
-                        overlap="circle"
-                        anchorOrigin={{
-                            vertical: 'bottom',
-                            horizontal: 'right'
-                        }}
-                        variant="dot"
-
-                        color={'success'}
-                        size={12}
-                    >
-                        <Avatar className={classes.avatar}>
-                            <SettingsApplicationsIcon />
-                        </Avatar>
-                    </SystemdBadge>
-                </ListItemAvatar>
-
-                <ListItemText
-                    className={classes.text}
-                    primary={
-                        'Service_with_a_very_long_name_lol_tick'
-                    }
-
-                    secondary={
-                        'service'
-                    }
-                />
-
-                <ListItemSecondaryAction>
-                    <IconButton>
-                        <ChatOutlinedIcon />
-                    </IconButton>
-                </ListItemSecondaryAction>
-            </ListItem>
+            {units}
         </List>
     );
 }
+
+Systemd.propTypes = {
+    data: PropTypes.object.isRequired
+};
+
+export default Systemd;
