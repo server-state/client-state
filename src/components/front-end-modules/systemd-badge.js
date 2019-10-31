@@ -1,15 +1,20 @@
+import React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles, Badge } from '@material-ui/core';
+import { getThemeType } from './systemd-mapper';
 
-const SystemdBadge = withStyles(theme => ({
+
+// Simple badge which positions over the child element 
+// with a ripple-like animation option
+const DottedBadge = withStyles(theme => ({
     badge: {
         borderRadius: '50%',
-        width: props => props.size > 0 ? props.size : 6,
-        height: props => props.size > 0 ? props.size : 6,
-        backgroundColor: props => props.color
-            ? theme.palette[props.color].main
-            : theme.palette.disabled.main,
+        width: 10,
+        height: 10,
+        backgroundColor: props => theme.palette[props.themeType].main,
         boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
         '&::after': {
+            display: props => props.blinking ? 'block' : 'none',
             position: 'absolute',
             top: 0,
             left: 0,
@@ -17,11 +22,10 @@ const SystemdBadge = withStyles(theme => ({
             height: '100%',
             borderRadius: '50%',
             animation: '$ripple 2.0s infinite ease-in-out',
-            border: props => props.color
-                ? `1px solid ${theme.palette[props.color].main}`
-                : `1px solid ${theme.palette.disabled.main}`,
-            content: props => props.color !== 'disabled' && props.color !== 'success' ? '""' : ''
-        }
+            border: '1px solid',
+            borderColor: props => theme.palette[props.themeType].main,
+            content: '""'
+        },
     },
     '@keyframes ripple': {
         '0%': {
@@ -33,6 +37,41 @@ const SystemdBadge = withStyles(theme => ({
             opacity: 0
         }
     }
-}))(Badge);
+}))(({ classes, themeType, blinking, ...other }) => (
+    <Badge classes={{ badge: classes.badge }} {...other} />
+));
+
+DottedBadge.propTypes = {
+    themeType: PropTypes.string.isRequired,
+    blinking: PropTypes.bool.isRequired
+};
+
+
+// Systemd badge on the bottom right corner of the avatar
+// which interprets the current status of the unit
+function SystemdBadge(props) {
+    const themeType = getThemeType(props.status);
+
+    return (
+        <DottedBadge
+            themeType={themeType}
+            blinking={themeType === 'error' || themeType === 'warning' || themeType === 'information'}
+
+            overlap="circle"
+            variant="dot"
+            anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'right'
+            }}
+        >
+            {props.children}
+        </DottedBadge>
+    );
+}
+
+SystemdBadge.propTypes = {
+    status: PropTypes.string.isRequired,
+    children: PropTypes.element.isRequired
+}
 
 export default SystemdBadge;

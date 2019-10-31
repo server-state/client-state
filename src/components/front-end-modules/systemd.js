@@ -9,7 +9,11 @@ function Systemd(props) {
     let units = [];
     for (const unitName in props.data) {
         units.push(
-            <SystemdListItem unitName={unitName} unitInfos={props.data[unitName]} />
+            <SystemdListItem 
+                key={unitName}
+                unitName={unitName}
+                unitInfos={props.data[unitName]} 
+            />
         );
     }
 

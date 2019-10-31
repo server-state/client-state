@@ -1,29 +1,81 @@
 /*
-systemd status-codes:
+systemd cbm status-codes:
+(priority from top to bottom)
 
-    [Name]             [Message type]       [come from]       [Priority (nice)]
-  - activating      -> warning          <=> activeState     - 2
-  - reloading       -> warning          <=> activeState     - 2
-  - active          -> success          <=> activeState     - 3
-  - deactivating    -> warning          <=> activeState     - 2
-  - disabled        -> disabled         <=> unitFileState   - 0
-  - not-found       -> error            <=> unitLoadState   - 1
-  - masked          -> disabled         <=> unitLoadState   - 0-1
-  - maintenance     -> warning          <=> activeState     - 2
-  - failed          -> error            <=> activeState     - 1
-  - bad-setting     -> error            <=> unitLoadState   - 1
-  - error           -> error            <=> unitLoadState   - 1
+    [status name]   [ThemeType]         [case select]
+  - stub            -> warning          <=> unitLoadState === "stub"
+  - not-found       -> error            <=> unitLoadState === "not-found"
+  - bad-setting     -> error            <=> unitLoadState === "bad-setting"
+  - error           -> error            <=> unitLoadState === "error"
+  - merged          -> information      <=> unitLoadState === "merged"
+( - masked          -> information      <=> unitLoadState === "masked" /
+  - masked          -> disabled         <=> unitLoadState === "masked" )
+  - inactive        -> disabled         <=> activeState === "inactive" && unitFileState === "disabled"
+  - not-activating  -> error            <=> activeState === "inactive" && unitFileState === "enabled"
+  - active          -> success          <=> activeState === "active"
+  - reloading       -> warning          <=> activeState === "reloading"
+  - failed          -> error            <=> activeState === "failed"
+  - activating      -> warning          <=> activeState === "activating"
+  - deactivating    -> warning          <=> activeState === "deactivating"
+  - maintenance     -> warning          <=> activeState === "maintenance"
+
+  - no-information  -> error            <=> [self defined] (if unit state can not be obtained)
 
 Run "systemctl --state=help" for more information.
 
 */
 
 export function getStatus(unitLoadState, unitFileState, activeState) {
-  return 'disabled';
+    if (!unitLoadState || typeof unitLoadState !== 'string')
+        return 'no-information-by-load';
+    
+    if (unitLoadState !== 'loaded')
+        return unitLoadState;
+    
+    if (!activeState || typeof activeState !== 'string')
+        return 'no-information-by-active';
+
+    if (activeState === 'inactive') {
+        if (!unitFileState || typeof unitFileState  !== 'string')
+            return 'no-information-by-file';
+        
+        if (unitFileState === "disabled")
+            return "inactive"
+        else
+            return "not-activating"
+    }
+
+    return activeState;
 }
 
-export function getMessageType(status) {
-  return 'disabled';
+export function getThemeType(status) {
+    switch (status) {
+        case 'not-found':
+        case 'bad-setting':
+        case 'error':
+        case 'failed':
+            return 'error';
+
+        case 'reloading':
+        case 'activating':
+        case 'deactivating':
+        case 'maintenance':
+            return 'warning';
+
+        case 'active':
+            return 'success';
+
+        case 'merged':
+        case 'masked':
+            return 'information';
+
+        case 'inactive':
+        // case 'masked':
+            return 'disabled';
+
+        default:
+            return 'error';
+  }
 }
 
-export default {getStatus, getMessageType};
+export default { getStatus, getThemeType };

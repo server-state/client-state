@@ -26,9 +26,9 @@ function SystemdListItem(props) {
 
     const [name, type] = props.unitName.split('.');
     const status = getStatus(
-        props.unitInfos['loadState'],
-        props.unitInfos['unitFileState'],
-        props.unitInfos['activeState']
+        props.unitInfos['LoadState'],
+        props.unitInfos['UnitFileState'],
+        props.unitInfos['ActiveState']
     );
 
     const handleOpen = () => {
@@ -40,20 +40,10 @@ function SystemdListItem(props) {
     };
 
     return (
-        <ListItem>
+        <ListItem onClick={handleOpen}>
             {/* ListItem Avatar with status badge */}
             <ListItemAvatar>
-                <SystemdBadge
-                    overlap="circle"
-                    anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: 'right'
-                    }}
-                    variant="dot"
-
-                    color={'warning'}
-                    size={10}
-                >
+                <SystemdBadge status={status}>
                     <Avatar className={classes.avatar}>
                         <CropFreeIcon />
                     </Avatar>

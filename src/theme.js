@@ -1,4 +1,4 @@
-import {amber, blueGrey, red, green, yellow, blue, grey, deepOrange} from '@material-ui/core/colors';
+import {amber, blueGrey, green, blue, grey, deepOrange} from '@material-ui/core/colors';
 import {createMuiTheme} from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
@@ -12,18 +12,23 @@ const theme = createMuiTheme({
         },
         error: {
             main: deepOrange["A400"],
+            text: deepOrange["800"]
         },
         warning: {
-            main: amber["A400"]
+            main: amber["A400"],
+            text: amber["800"]
         },
         success: {
-            main: green["A700"]
+            main: green["A700"],
+            text: green["700"]
         },
         information: {
-            main: blue["A700"]
+            main: blue["500"],
+            text: blue["700"]
         },
         disabled: {
-            main: grey["400"]
+            main: grey["400"],
+            text: grey["700"]
         }
     }
 });
