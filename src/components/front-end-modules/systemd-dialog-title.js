@@ -26,10 +26,12 @@ const styles = theme => ({
         margin: 0,
         padding: theme.spacing(2),
         display: 'flex',
-        alignItems: 'center'
+        flexWrap: 'wrap'
+        // justifyContent: 'space-between'
     },
     status: {
-        paddingLeft: theme.spacing(2)
+        textAlign: 'center',
+        padding: `0px ${theme.spacing(2)}px`
     }
 });
 
@@ -37,7 +39,7 @@ const SystemdDialogTitle = withStyles(styles)(props => {
     const { name, status, classes, ...other } = props;
     return (
         <DialogTitle disableTypography className={classes.root} {...other}>
-            <Typography variant="h6">{name}</Typography>
+            <Typography className={classes.name} variant="h6">{name}</Typography>
             <StatusTypography
                 className={classes.status}
                 variant="button"

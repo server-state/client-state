@@ -1,7 +1,8 @@
 import React from 'react';
-import {makeStyles} from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+import { makeStyles, Box, Grid } from '@material-ui/core';
+
 import ContentElementWrapper from './content-element-wrapper';
-import {Box, Grid} from "@material-ui/core";
 
 
 const useStyles = makeStyles(() => ({
@@ -10,7 +11,7 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-export default function ContentRow(props) {
+function ContentRow(props) {
     const classes = useStyles();
 
     return (
@@ -25,11 +26,20 @@ export default function ContentRow(props) {
                 gap={'small'}
             >
                 {props.elements.map((element, index) =>
-                    <Grid item xs={12} sm={element.width} className={classes.element}>
-                        <ContentElementWrapper element={element} key={index}/>
+                    <Grid
+                        key={index} className={classes.element}
+                        item xs={12} sm={element.width}
+                    >
+                        <ContentElementWrapper element={element} />
                     </Grid>
                 )}
             </Grid>
         </Box>
     );
 }
+
+ContentRow.propTypes = {
+    elements: PropTypes.array.isRequired
+};
+
+export default ContentRow;

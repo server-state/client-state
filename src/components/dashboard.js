@@ -1,8 +1,11 @@
 import React from 'react';
-import {Box, Container, Grid} from "@material-ui/core";
+import PropTypes from 'prop-types';
+import { Box, Container, Grid } from "@material-ui/core";
+
 import ContentRow from './content-row';
 
-export default function Dashboard(props) {
+
+function Dashboard(props) {
     let rows = [];
     let currentRowWidth = 0;
     let currentRow = [];
@@ -13,7 +16,7 @@ export default function Dashboard(props) {
             currentRowWidth = 0;
             currentRow = [];
         }
-        console.log(rows, currentRowWidth, currentRow, content);
+        console.log(rows, currentRowWidth, currentRow, content); // REMOVE IN PRODUCTION BUILD !!!
         currentRow.push(content);
         currentRowWidth += content.width;
     }
@@ -32,5 +35,10 @@ export default function Dashboard(props) {
             </Box>
         </Container>
     );
-
 }
+
+Dashboard.propTypes = {
+    config: PropTypes.object.isRequired
+};
+
+export default Dashboard;

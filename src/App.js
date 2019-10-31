@@ -1,5 +1,5 @@
 import React from 'react';
-import {ThemeProvider} from '@material-ui/styles';
+import { ThemeProvider } from '@material-ui/styles';
 
 import theme from './theme';
 import Header from './components/header/';
@@ -11,8 +11,9 @@ const defaultConfig = [
         title: "Dashboard",
         contents: [
             {
-                name: "Systemd Static",
+                name: "Systemd services",
                 component: 'systemd',
+                //path: 'https://192.168.88.251:4434/api/v1/systemd',
                 path: 'systemd',
                 width: 12
             },
@@ -61,21 +62,19 @@ export default class App extends React.Component {
     }
 
     updateConfig(config) {
-        this.setState({
-            config: Object.assign([], this.state.config, config)
-        });
+        const newConfig = Object.assign([], this.state.config, config);
 
-        let dashboards = [];
-
-        for (const dashboard of this.state.config) {
-            dashboards.push(dashboard.title);
+        let newDashboards = [];
+        for (const dashboard of newConfig) {
+            newDashboards.push(dashboard.title);
         }
 
         this.setState({
-            dashboards: dashboards
+            config: newConfig,
+            dashboards: newDashboards
         });
 
-        console.log(JSON.stringify(this.state, null, 2));
+        console.log(JSON.stringify(this.state, null, 2)); // REMOVE IN PRODUCTION BUILD !!!
     }
 
     render() {

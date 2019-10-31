@@ -1,12 +1,19 @@
 import React from 'react';
-import { Card, CardHeader, CardContent, IconButton, Divider, Link, LinearProgress, Typography } from '@material-ui/core';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import PropTypes from 'prop-types';
+import {
+    Typography, Divider, Link, IconButton, LinearProgress,
+    Card, CardHeader, CardContent
+} from '@material-ui/core';
+import {
+    MoreVert as MoreVertIcon
+} from '@material-ui/icons';
 
 import elementComponents from '../config/component-registry';
 import { module, fullURL } from '../lib/api';
 import ElementAvatar from './element-avatar';
 
-export default class ContentElementWrapper extends React.Component {
+
+class ContentElementWrapper extends React.Component {
     constructor(props) {
         super(props);
         this.props = props;
@@ -21,7 +28,7 @@ export default class ContentElementWrapper extends React.Component {
                 console.log(res); // REMOVE IN PRODUCTION BUILD !!!
                 this.setState({ data: res.data });
             }).catch((e) => {
-                this.setState({ error: 'Could not be loaded!' });
+                this.setState({ error: 'Data could not be loaded!' });
                 console.warn(e);
             });
         }
@@ -34,19 +41,19 @@ export default class ContentElementWrapper extends React.Component {
                 <this.state.component data={this.state.data} minWidth={100}/>
             );
 
-            // if an error occurred, render the Error message
+        // if an error occurred, render the Error message
         } else if (this.state.error) {
             return (
                 <>
                     <Typography variant={'h5'} color={'error'}>
                         Error
-                        </Typography>
+                    </Typography>
                     <Typography variant={'body1'} color={'error'}>
                         {this.state.error}
                     </Typography>
                 </>
             );
-            // else render a Linear Indeterminate
+        // else render a Linear Indeterminate
         } else {
             return (<LinearProgress />);
         }
@@ -74,7 +81,7 @@ export default class ContentElementWrapper extends React.Component {
                         </Link>
                     } />
 
-                <Divider light="true" variant="middle" />
+                <Divider light variant="middle" />
                 <CardContent>
                     {this.renderModuleContent()}
                 </CardContent>
@@ -82,3 +89,9 @@ export default class ContentElementWrapper extends React.Component {
         );
     }
 }
+
+ContentElementWrapper.propTypes = {
+    element: PropTypes.object.isRequired
+};
+
+export default ContentElementWrapper;
