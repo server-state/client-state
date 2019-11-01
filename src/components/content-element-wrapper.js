@@ -25,7 +25,6 @@ class ContentElementWrapper extends React.Component {
             this.state.component = elementComponents[this.props.element.component];
 
             module(props.element.path).then((res) => {
-                console.log(res); // REMOVE IN PRODUCTION BUILD !!!
                 this.setState({ data: res.data });
             }).catch((e) => {
                 this.setState({ error: 'Data could not be loaded!' });

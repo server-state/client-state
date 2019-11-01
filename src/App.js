@@ -46,6 +46,12 @@ const defaultConfig = [
                 component: 'raw',
                 path: 'disk-usage',
                 width: 8
+            },
+            {
+                name: 'Tablelike',
+                component: 'table',
+                path: 'table',
+                width: 12
             }
         ]
     }
@@ -73,8 +79,6 @@ export default class App extends React.Component {
             config: newConfig,
             dashboards: newDashboards
         });
-
-        console.log(JSON.stringify(this.state, null, 2)); // REMOVE IN PRODUCTION BUILD !!!
     }
 
     render() {
