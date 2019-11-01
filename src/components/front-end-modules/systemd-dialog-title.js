@@ -1,55 +1,53 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles, Typography, DialogTitle } from '@material-ui/core';
+import { withStyles, makeStyles, Typography, DialogTitle, Chip } from '@material-ui/core';
 
 import { getThemeType } from './systemd-mapper';
 
 
-// Simple status typography that displays 
+// Simple status chipthat displays 
 // the text color based on the given theme
-const StatusTypography = withStyles(theme => ({
+const SystemdChip = withStyles(theme => ({
     root: {
-        color: props => theme.palette[props.themeType].text
+        borderColor: props => theme.palette[props.themeType].main,
+        color: props => theme.palette[props.themeType].main
     }
 }))(({ classes, themeType, ...other }) => (
-    <Typography classes={{ root: classes.root }} {...other} />
+    <Chip classes={{ root: classes.root }} {...other} />
 ));
-
-StatusTypography.propTypes = {
-    themeType: PropTypes.string.isRequired
-};
 
 
 // Custom Dialog title with unit name and current status
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
     root: {
         margin: 0,
         padding: theme.spacing(2),
         display: 'flex',
-        flexWrap: 'wrap'
+        flexWrap: 'wrap',
+        //alignItems: 'center'
         // justifyContent: 'space-between'
     },
-    status: {
-        textAlign: 'center',
-        padding: `0px ${theme.spacing(2)}px`
+    name: {
+        paddingRight: theme.spacing(2),
     }
-});
+}));
 
-const SystemdDialogTitle = withStyles(styles)(props => {
-    const { name, status, classes, ...other } = props;
+function SystemdDialogTitle(props) {
+    const { name, status, ...other } = props;
+    const classes = useStyles();
+
     return (
         <DialogTitle disableTypography className={classes.root} {...other}>
-            <Typography className={classes.name} variant="h6">{name}</Typography>
-            <StatusTypography
-                className={classes.status}
-                variant="button"
-                themeType={getThemeType(status)}
-            >
-                {status}
-            </StatusTypography>
+            <Typography className={classes.name} variant="h6">
+                {name}
+            </Typography>
+            <SystemdChip 
+                themeType={getThemeType(status)} variant="outlined"
+                label={status} 
+            />
         </DialogTitle>
     );
-});
+}
 
 SystemdDialogTitle.propTypes = {
     name: PropTypes.string.isRequired,
