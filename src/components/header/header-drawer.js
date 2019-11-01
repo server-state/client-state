@@ -1,7 +1,10 @@
 import React from 'react';
-import { IconButton, SwipeableDrawer, List, ListItem, ListItemText } from '@material-ui/core';
+import PropTypes from 'prop-types';
+import {
+    makeStyles, IconButton, SwipeableDrawer,
+    List, ListItem, ListItemText
+} from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-import { makeStyles } from '@material-ui/core/styles';
 
 import SecondaryTooltip from '../secondary-tooltip';
 
@@ -15,7 +18,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function HeaderDrawer(props) {
+function HeaderDrawer(props) {
     const classes = useStyles();
 
     // disable "swipe to go back" feature on iOS
@@ -24,7 +27,9 @@ export default function HeaderDrawer(props) {
     // simple react state for open/close behaviour
     const [state, setState] = React.useState(false);
     const toggleDrawer = newState => event => {
-        if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+        if (event && 
+            event.type === 'keydown' && 
+            (event.key === 'Tab' || event.key === 'Shift')) {
             return;
         }
         setState(newState);
@@ -82,3 +87,12 @@ export default function HeaderDrawer(props) {
         </div>
     );
 }
+
+HeaderDrawer.propTypes = {
+    dashboards: PropTypes.arrayOf(PropTypes.string).isRequired,
+    selected: PropTypes.string.isRequired,
+    dense: PropTypes.bool,
+    onDrawerSelected: PropTypes.func.isRequired
+};
+
+export default HeaderDrawer;

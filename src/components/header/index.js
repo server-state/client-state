@@ -1,8 +1,6 @@
 import React from 'react';
-
-// Material-UI imports
-import { AppBar, Toolbar, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+import { makeStyles, AppBar, Toolbar, Typography } from '@material-ui/core';
 
 import HeaderDrawer from './header-drawer';
 import HeaderMenu from './header-menu';
@@ -11,7 +9,7 @@ import HeaderRefresh from './header-refresh';
 
 
 // pre-defined style
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles({
     root: {
         flexGrow: 1
     },
@@ -22,10 +20,9 @@ const useStyles = makeStyles(theme => ({
         minWidth: 0,
         whiteSpace: 'nowrap'
     }
-}));
+});
 
-
-export default function Header(props) {
+function Header(props) {
     const classes = useStyles();
 
     return (
@@ -36,15 +33,11 @@ export default function Header(props) {
                         dashboards={props.dashboards}
                         selected={props.title}
                         dense={props.dense}
-
                         onDrawerSelected={props.onDrawerSelected}
                     />
 
                     {/* Header text */}
-                    <Typography
-                        variant="h6"
-                        className={classes.title}
-                    >
+                    <Typography variant="h6" className={classes.title}>
                         {props.title}
                     </Typography>
 
@@ -57,3 +50,15 @@ export default function Header(props) {
         </div>
     );
 }
+
+Header.propTypes = {
+    onDrawerSelected: PropTypes.func.isRequired,
+    onMenuSelected: PropTypes.func.isRequired,
+    onRefresh: PropTypes.func.isRequired,
+    onToggleEdit: PropTypes.func.isRequired,
+    title: PropTypes.string.isRequired,
+    dashboards: PropTypes.arrayOf(PropTypes.string).isRequired,
+    dense: PropTypes.bool
+};
+
+export default Header;

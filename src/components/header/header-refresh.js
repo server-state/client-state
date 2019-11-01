@@ -1,6 +1,6 @@
 import React from 'react';
-import { IconButton } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+import { makeStyles, IconButton } from '@material-ui/core';
 import RefreshIcon from '@material-ui/icons/Refresh';
 
 import SecondaryTooltip from '../secondary-tooltip';
@@ -15,8 +15,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-
-export default function HeaderRefresh(props) {
+function HeaderRefresh(props) {
     const [rotate, setRotate] = React.useState(false);
     const classes = useStyles(rotate);
 
@@ -38,3 +37,9 @@ export default function HeaderRefresh(props) {
         </SecondaryTooltip>
     );
 }
+
+HeaderRefresh.propTypes = {
+    onRefresh: PropTypes.func.isRequired
+};
+
+export default HeaderRefresh;

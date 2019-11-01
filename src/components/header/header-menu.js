@@ -1,10 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { IconButton, Menu, MenuItem } from '@material-ui/core';
-import {
-    MoreVert as MoreVertIcon
-} from '@material-ui/icons';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 import SecondaryTooltip from '../secondary-tooltip';
+
 
 // given options
 const options = [
@@ -15,7 +15,7 @@ const options = [
 
 const ITEM_HEIGHT = 48;
 
-export default function HeaderMenu(props) {
+function HeaderMenu(props) {
     // simple react state for open/close behaviour
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
@@ -67,3 +67,9 @@ export default function HeaderMenu(props) {
         </div>
     );
 }
+
+HeaderMenu.propTypes = {
+    onMenuSelected: PropTypes.func.isRequired
+};
+
+export default HeaderMenu;

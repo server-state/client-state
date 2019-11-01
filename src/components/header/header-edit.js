@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { IconButton } from '@material-ui/core';
 import ViewQuiltIcon from '@material-ui/icons/ViewQuilt';
 
 import SecondaryTooltip from '../secondary-tooltip';
 
 
-export default function HeaderEdit(props) {
+function HeaderEdit(props) {
     return (
         <SecondaryTooltip title="Edit">
             <IconButton
@@ -18,3 +19,9 @@ export default function HeaderEdit(props) {
         </SecondaryTooltip>
     );
 }
+
+HeaderEdit.propTypes = {
+    onToggleEdit: PropTypes.func.isRequired
+};
+
+export default HeaderEdit;
