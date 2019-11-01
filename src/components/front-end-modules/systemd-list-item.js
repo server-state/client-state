@@ -4,13 +4,11 @@ import {
     makeStyles, Avatar, IconButton,
     ListItem, ListItemAvatar, ListItemText, ListItemSecondaryAction
 } from '@material-ui/core';
-import {
-    CropFree as CropFreeIcon,
-    Info as InfoIcon
-} from '@material-ui/icons';
+import InfoIcon from '@material-ui/icons/Info';
 
 import SystemdBadge from './systemd-badge';
 import SystemdDialog from './systemd-dialog';
+import SystemdIconGenerator from './systemd-icon-generator';
 import { getStatus } from './systemd-mapper';
 
 
@@ -45,7 +43,7 @@ function SystemdListItem(props) {
             <ListItemAvatar>
                 <SystemdBadge status={status}>
                     <Avatar className={classes.avatar}>
-                        <CropFreeIcon />
+                        <SystemdIconGenerator name={name} type={type} />
                     </Avatar>
                 </SystemdBadge>
             </ListItemAvatar>
