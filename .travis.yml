@@ -10,7 +10,4 @@ cache:
 script:
   - npm run build
   - npm run test
-  - echo $PATH
-  - whereis cypress
-  - cypress install
   - npm run ci:e2e
