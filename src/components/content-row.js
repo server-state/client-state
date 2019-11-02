@@ -30,7 +30,7 @@ function ContentRow(props) {
                         key={index} className={classes.element}
                         item xs={12} sm={element.width}
                     >
-                        <ContentElementWrapper element={element} />
+                        <ContentElementWrapper className={classes.element} element={element} />
                     </Grid>
                 )}
             </Grid>

@@ -19,7 +19,7 @@ const defaultConfig = [
             },
             {
                 name: "Raw 1",
-                component: 'raw',
+                component: 'rawPretty',
                 path: 'raw',
                 width: 12
             },
