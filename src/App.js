@@ -11,6 +11,12 @@ const defaultConfig = [
         title: "Dashboard",
         contents: [
             {
+                name: "Linux Raid Static",
+                component: "linuxRaid",
+                path: 'linux-raid',
+                width: 12
+            },
+            {
                 name: "Systemd services",
                 component: 'systemd',
                 //path: 'https://192.168.88.251:4434/api/v1/systemd',

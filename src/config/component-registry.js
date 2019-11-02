@@ -2,6 +2,7 @@ import Raw from '../components/front-end-modules/raw';
 import Systemd from '../components/front-end-modules/systemd/systemd';
 import Table from '@server-state/tablelike-table-cbm';
 import RawPretty from '../components/front-end-modules/raw-pretty';
+import linuxRaid from '../components/front-end-modules/linux-raid';
 
 const components = {
     raw: {
@@ -19,7 +20,8 @@ const components = {
         }
     },
     systemd: Systemd,
-    table: Table
+    table: Table,
+    linuxRaid: linuxRaid
 };
 
 export default components;
