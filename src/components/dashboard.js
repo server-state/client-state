@@ -1,11 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, Container, Grid } from "@material-ui/core";
+import { makeStyles, Box, Container, Grid } from "@material-ui/core";
 
 import ContentRow from './content-row';
 
 
+const useStyles = makeStyles({
+    grid: {
+        flexWrap: 'nowrap'
+    }
+});
+
 function Dashboard(props) {
+    const classes = useStyles();
+
     let rows = [];
     let currentRowWidth = 0;
     let currentRow = [];
@@ -24,7 +32,7 @@ function Dashboard(props) {
     return (
         <Container maxWidth={'md'}>
             <Box flexGrow={1} py={1}>
-                <Grid container direction={'column'}>
+                <Grid className={classes.grid} container direction={'column'}>
                     {rows.map((elements, index) => {
                         return <ContentRow key={index} elements={elements}/>;
                     })}

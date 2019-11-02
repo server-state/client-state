@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Typography, Chip, ButtonGroup, Button, Divider, LinearProgress } from '@material-ui/core';
+import { makeStyles, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Typography, Chip, ButtonGroup, Button, LinearProgress } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 
