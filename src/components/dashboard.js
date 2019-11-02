@@ -16,13 +16,10 @@ function Dashboard(props) {
             currentRowWidth = 0;
             currentRow = [];
         }
-        console.log(rows, currentRowWidth, currentRow, content); // REMOVE IN PRODUCTION BUILD !!!
         currentRow.push(content);
         currentRowWidth += content.width;
     }
     rows.push(currentRow);
-
-    console.log(rows);
 
     return (
         <Container maxWidth={'md'}>

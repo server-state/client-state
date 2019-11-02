@@ -20,12 +20,11 @@ class ContentElementWrapper extends React.Component {
         this.state = { data: null, error: null, component: null };
 
         if (!elementComponents[this.props.element.component]) {
-            this.state.error = 'Client-side module not found!';
+            this.state.error = 'CBM not found!';
         } else {
             this.state.component = elementComponents[this.props.element.component];
 
             module(props.element.path).then((res) => {
-                console.log(res); // REMOVE IN PRODUCTION BUILD !!!
                 this.setState({ data: res.data });
             }).catch((e) => {
                 this.setState({ error: 'Data could not be loaded!' });
@@ -38,7 +37,7 @@ class ContentElementWrapper extends React.Component {
         // if everything goes right, give FEM data and render it
         if (this.state.data) {
             return (
-                <this.state.component data={this.state.data} minWidth={100}/>
+                <this.state.component.component data={this.state.data} minWidth={100}/>
             );
 
         // if an error occurred, render the Error message

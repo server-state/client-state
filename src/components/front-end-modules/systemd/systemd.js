@@ -28,4 +28,10 @@ Systemd.propTypes = {
     data: PropTypes.object.isRequired
 };
 
-export default Systemd;
+export default {
+    component: Systemd,
+    info: {
+        name: 'systemd',
+        version: 'v1.0.0'
+    }
+};
