@@ -1247,10 +1247,10 @@
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
   integrity sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw==
 
-"@server-state/tablelike-table-cbm@^0.1.3":
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/@server-state/tablelike-table-cbm/-/tablelike-table-cbm-0.1.3.tgz#3ec067dd597c1c9871755113648eb990e7e9790c"
-  integrity sha512-FkqqXbeb776/vM7YgePFH2ip+kDDCed7oyXRDY0XISu0rAIZ84AWE7DFqdpfpQagZOzDCDRx14AnE5isUROyMg==
+"@server-state/tablelike-table-cbm@^0.1.5":
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/@server-state/tablelike-table-cbm/-/tablelike-table-cbm-0.1.5.tgz#9eafa5524d984ed22edbd1dd0e8141baf73fa588"
+  integrity sha512-k7o4rJaNwmbz0p+2rv4MJi/3gva/CIzOshEGFfYLqo7L7/uMTbHhyHHjdB5tlAVp9mE38uiDGroo1ZhUFubKeQ==
 
 "@svgr/babel-plugin-add-jsx-attribute@^4.2.0":
   version "4.2.0"
