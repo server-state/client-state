@@ -14,6 +14,8 @@ const useStyles = makeStyles({
 function Dashboard(props) {
     const classes = useStyles();
 
+    // Use a memo as this operation is kind of complex and shouldn't get executed unnecessarily
+    // Therefore, we only recalculate when the contents have actually changed
     const rows = useMemo(() => {
         let rows = [];
         let currentRowWidth = 0;

@@ -11,7 +11,9 @@ const useStyles = makeStyles(theme => ({
 
 export default function ElementAvatar(props) {
     const classes = useStyles();
-    
+
+    // Will often get executed with the same parameters (when the state of the parent element changes)
+    // Therefore, only execute it when necessary:
     const avatarSign = useMemo(() => {
         const firstLetter = props.name.charAt(0);
         switch (firstLetter) {
