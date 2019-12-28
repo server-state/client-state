@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles, Box, Container, Grid } from "@material-ui/core";
 
@@ -14,20 +14,24 @@ const useStyles = makeStyles({
 function Dashboard(props) {
     const classes = useStyles();
 
-    let rows = [];
-    let currentRowWidth = 0;
-    let currentRow = [];
-    for (let content of props.config.contents) {
-        if (currentRowWidth + content.width > 12) {
-            // Overflow => Start new row
-            rows.push(currentRow);
-            currentRowWidth = 0;
-            currentRow = [];
+    const rows = useMemo(() => {
+        let rows = [];
+        let currentRowWidth = 0;
+        let currentRow = [];
+        for (let content of props.config.contents) {
+            if (currentRowWidth + content.width > 12) {
+                // Overflow => Start new row
+                rows.push(currentRow);
+                currentRowWidth = 0;
+                currentRow = [];
+            }
+            currentRow.push(content);
+            currentRowWidth += content.width;
         }
-        currentRow.push(content);
-        currentRowWidth += content.width;
-    }
-    rows.push(currentRow);
+        rows.push(currentRow);
+
+        return rows;
+    }, [props.config.contents]);
 
     return (
         <Container maxWidth={'md'}>
