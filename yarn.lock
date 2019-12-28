@@ -1160,10 +1160,10 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
-"@material-ui/core@^4.7.1":
-  version "4.7.1"
-  resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-4.7.1.tgz#87b83da3f6adf45772c0a2be9fd9d162e026f10c"
-  integrity sha512-gqbZqpwUT5/59KTrWyA9Mr9s8NaNyfWHlEQToM1tfpiHqrIJajLVg2ZgVDzExvN985v2YQIfbuTNVzJDOnM28Q==
+"@material-ui/core@^4.8.0":
+  version "4.8.0"
+  resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-4.8.0.tgz#8fb4f4df2b35e3e781b1eec17d4aaf388edf3099"
+  integrity sha512-ODyvWlDOP0D3tU32wVlYRNrdS+LeJxB3xJbXdDxq6gnG4JhKk79+ylP0cImjPBI2yEZw0hcYHWFZOGD+0R1X4g==
   dependencies:
     "@babel/runtime" "^7.4.4"
     "@material-ui/styles" "^4.7.1"
@@ -1247,10 +1247,10 @@
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
   integrity sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw==
 
-"@server-state/tablelike-table-cbm@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@server-state/tablelike-table-cbm/-/tablelike-table-cbm-0.1.2.tgz#5cdfe4ae90b143219a4558f4b2a2e5de529d16d1"
-  integrity sha512-87l7UUEdc42etuUHMCdhuwtikRI7IFN0MGT3taX/IG8WSui2pNN2OYJUMosgCivDDlvQdPBTZiHB3BPZbat2YA==
+"@server-state/tablelike-table-cbm@^0.1.6":
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/@server-state/tablelike-table-cbm/-/tablelike-table-cbm-0.1.6.tgz#dded666e77ecc4c206e88fbd0fec09b9e95ad142"
+  integrity sha512-Tl4aEwUzGx0v61g1E08lGsVnxSr0KkZ5leAFPaCIAqdllbHh2i6s6YxGj8yu07X0CTZgKlrWGvkCKoV3FXVQTg==
 
 "@svgr/babel-plugin-add-jsx-attribute@^4.2.0":
   version "4.2.0"
@@ -3360,10 +3360,10 @@ cyclist@^1.0.1:
   resolved "https://registry.yarnpkg.com/cyclist/-/cyclist-1.0.1.tgz#596e9698fd0c80e12038c2b82d6eb1b35b6224d9"
   integrity sha1-WW6WmP0MgOEgOMK4LW6xs1tiJNk=
 
-cypress@^3.7.0:
-  version "3.7.0"
-  resolved "https://registry.yarnpkg.com/cypress/-/cypress-3.7.0.tgz#e2cd71b87b6ce0d4c72c6ea25da1005d75c1f231"
-  integrity sha512-o+vfRxqAba8TduelzfZQ4WHmj2yNEjaoO2EuZ8dZ9pJpuW+WGtBGheKIp6zkoQsp8ZgFe8OoHh1i2mY8BDnMAw==
+cypress@^3.8.0:
+  version "3.8.0"
+  resolved "https://registry.yarnpkg.com/cypress/-/cypress-3.8.0.tgz#7d4cd08f81f9048ee36760cc9ee3b9014f9e84ab"
+  integrity sha512-gtEbqCgKETRc3pQFMsELRgIBNgiQg7vbOWTrCi7WE7bgOwNCaW9PEX8Jb3UN8z/maIp9WwzoFfeySfelYY7nRA==
   dependencies:
     "@cypress/listr-verbose-renderer" "0.4.1"
     "@cypress/xvfb" "1.2.4"
@@ -3976,10 +3976,10 @@ eslint-module-utils@^2.4.0:
     debug "^2.6.8"
     pkg-dir "^2.0.0"
 
-eslint-plugin-cypress@^2.7.0:
-  version "2.7.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-cypress/-/eslint-plugin-cypress-2.7.0.tgz#117f14ce63698e4c4f3afea3d7e27025c8d504f0"
-  integrity sha512-52Lq5ePCD/8jc536e1RqtLfj33BAy1s7BlYgCjbG39J5kqUitcTlRY5i3NRoeAyPHueDwETsq0eASF44ugLosQ==
+eslint-plugin-cypress@^2.8.1:
+  version "2.8.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-cypress/-/eslint-plugin-cypress-2.8.1.tgz#981a0f3658b40de430bcf05cabc96b396487c91f"
+  integrity sha512-jDpcP+MmjmqQO/x3bwIXgp4cl7Q66RYS5/IsuOQP4Qo2sEqE3DI8tTxBQ1EhnV5qEDd2Z2TYHR+5vYI6oCN4uw==
   dependencies:
     globals "^11.12.0"
 
