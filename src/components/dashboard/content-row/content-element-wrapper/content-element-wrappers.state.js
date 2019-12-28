@@ -12,7 +12,7 @@ export default Machine(
                     src: (context) => module(context.module),
                     onDone: {
                         target: 'loaded',
-                        actions: assign({data: (context, event) => event.data})
+                        actions: assign({data: (context, event) => event.data.data})
                     },
                     onError: {
                         target: 'error',
