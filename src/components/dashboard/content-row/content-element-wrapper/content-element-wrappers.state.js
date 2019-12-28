@@ -1,5 +1,5 @@
 import {assign, Machine} from 'xstate';
-import {module} from "../lib/api";
+import {module} from "../../../../lib/api";
 
 export default Machine(
     {
@@ -22,7 +22,11 @@ export default Machine(
             },
             loaded: {
                 on: {
-                    RELOAD: 'loading'
+                    RELOAD: 'loading',
+                    ERROR: {
+                        target: 'error',
+                        actions: assign({errorMessage: (context, event) => event.data.message})
+                    }
                 }
             },
             error: {

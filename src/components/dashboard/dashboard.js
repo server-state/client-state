@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles, Box, Container, Grid } from "@material-ui/core";
 
-import ContentRow from './content-row';
+import ContentRow from './content-row/content-row';
 
 
 const useStyles = makeStyles({

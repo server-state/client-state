@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles, Box, Grid } from '@material-ui/core';
 
-import ContentElementWrapper from './content-element-wrapper';
+import ContentElementWrapper from './content-element-wrapper/content-element-wrapper';
 
 
 const useStyles = makeStyles(() => ({

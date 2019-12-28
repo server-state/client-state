@@ -8,12 +8,13 @@ import {
     MoreVert as MoreVertIcon
 } from '@material-ui/icons';
 
-import elementComponents from '../config/component-registry';
-import {fullURL} from '../lib/api';
+import elementComponents from '../../../../config/component-registry';
+import {fullURL} from '../../../../lib/api';
 import ElementAvatar from './element-avatar';
 
 import CEWState from './content-element-wrappers.state';
 import {useMachine} from "@xstate/react/lib";
+import CEWErrorBoundary from "./cew-error-boundary";
 
 function ContentElementWrapper(props) {
     const name = props.element.name;
@@ -70,7 +71,9 @@ function ContentElementWrapper(props) {
 
             <Divider light variant="middle"/>
             <CardContent>
-                {innerContent}
+                <CEWErrorBoundary onError={error => send({type: 'ERROR', data: error})}>
+                    {innerContent}
+                </CEWErrorBoundary>
             </CardContent>
         </Card>
     );

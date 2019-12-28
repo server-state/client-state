@@ -3,7 +3,7 @@ import { ThemeProvider } from '@material-ui/styles';
 
 import theme from './theme';
 import Header from './components/header/';
-import Dashboard from "./components/dashboard";
+import Dashboard from "./components/dashboard/dashboard";
 
 
 const defaultConfig = [
