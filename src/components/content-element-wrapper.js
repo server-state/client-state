@@ -9,84 +9,71 @@ import {
 } from '@material-ui/icons';
 
 import elementComponents from '../config/component-registry';
-import { module, fullURL } from '../lib/api';
+import {fullURL} from '../lib/api';
 import ElementAvatar from './element-avatar';
 
+import CEWState from './content-element-wrappers.state';
+import {useMachine} from "@xstate/react/lib";
 
-class ContentElementWrapper extends React.Component {
-    constructor(props) {
-        super(props);
-        this.props = props;
-        this.state = { data: null, error: null, component: null };
+function ContentElementWrapper(props) {
+    const name = props.element.name;
+    const path = props.element.path;
+    const MyComponent = elementComponents[props.element.component].component;
 
-        if (!elementComponents[this.props.element.component]) {
-            this.state.error = 'CBM not found!';
-        } else {
-            this.state.component = elementComponents[this.props.element.component];
+    const [current, send] = useMachine(CEWState.withContext({
+        module: path,
+        data: undefined,
+        errorMessage: undefined
+    }));
 
-            module(props.element.path).then((res) => {
-                this.setState({ data: res.data });
-            }).catch((e) => {
-                this.setState({ error: 'Data could not be loaded!' });
-                console.warn(e);
-            });
-        }
-    }
+    let innerContent;
 
-    renderModuleContent() {
-        // if everything goes right, give FEM data and render it
-        if (this.state.data) {
-            return (
-                <this.state.component.component data={this.state.data} minWidth={100}/>
-            );
-
-        // if an error occurred, render the Error message
-        } else if (this.state.error) {
-            return (
+    switch (current.value) {
+        case 'loaded':
+            innerContent =
+                MyComponent ? <MyComponent data={current.context.data} minWidth={100}/> : 'undefined';
+            break;
+        case 'error':
+            innerContent =
                 <>
                     <Typography variant={'h5'} color={'error'}>
                         Error
                     </Typography>
                     <Typography variant={'body1'} color={'error'}>
-                        {this.state.error}
+                        {current.context.errorMessage}
                     </Typography>
-                </>
-            );
-        // else render a Linear Indeterminate
-        } else {
-            return (<LinearProgress />);
-        }
+                    <Link onClick={() => send('RELOAD')}>
+                        Retry
+                    </Link>
+                </>;
+            break;
+        default:
+            innerContent = <LinearProgress/>;
     }
+    return (
+        <Card style={{'height': '100%'}}>
+            <CardHeader
+                avatar={
+                    <ElementAvatar name={name}/>
+                }
+                action={
+                    <IconButton aria-label="expand">
+                        <MoreVertIcon/>
+                    </IconButton>
+                }
+                title={name}
+                subheader={
+                    <Link href={fullURL(path)} target={'_blank'} color={'inherit'}>
+                        {path}
+                    </Link>
+                }/>
 
-    render() {
-        const name = this.props.element.name;
-        const path = this.props.element.path;
-
-        return (
-            <Card style={{'height': '100%'}}>
-                <CardHeader
-                    avatar={
-                        <ElementAvatar name={name} />
-                    }
-                    action={
-                        <IconButton aria-label="expand">
-                            <MoreVertIcon />
-                        </IconButton>
-                    }
-                    title={this.props.element.name}
-                    subheader={
-                        <Link href={fullURL(path)} color={'inherit'}>
-                            {path}
-                        </Link>
-                    } />
-
-                <Divider light variant="middle" />
-                <CardContent>
-                    {this.renderModuleContent()}
-                </CardContent>
-            </Card>
-        );
-    }
+            <Divider light variant="middle"/>
+            <CardContent>
+                {innerContent}
+            </CardContent>
+        </Card>
+    );
 }
 
 ContentElementWrapper.propTypes = {
