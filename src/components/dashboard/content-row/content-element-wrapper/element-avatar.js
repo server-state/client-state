@@ -1,7 +1,6 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import { Avatar } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-
 
 const useStyles = makeStyles(theme => ({
     avatar: {
@@ -10,22 +9,22 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function generateAvaterSign(name) {
-    const firstLetter = name.charAt(0);
-    switch (firstLetter) {
-        case 'ß':
-            return 'ß';
-        default:
-            return firstLetter.toUpperCase();
-    }
-}
-
 export default function ElementAvatar(props) {
     const classes = useStyles();
+    
+    const avatarSign = useMemo(() => {
+        const firstLetter = props.name.charAt(0);
+        switch (firstLetter) {
+            case 'ß':
+                return 'ß';
+            default:
+                return firstLetter.toUpperCase();
+        }
+    }, [props.name]);
 
     return (
         <Avatar aria-label="recipe" className={classes.avatar}>
-            {generateAvaterSign(props.name)}
+            {avatarSign}
         </Avatar>
     );
 }
