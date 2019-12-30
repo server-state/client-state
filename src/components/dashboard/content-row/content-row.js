@@ -11,31 +11,29 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
-function ContentRow(props) {
+function ContentRow({elements}) {
     const classes = useStyles();
 
-    return (
-        <Box py={1}>
-            <Grid
-                container
-                spacing={2}
-                direction={'row'}
-                alignItems={'stretch'}
-                justify={'center'}
-                pad={'small'}
-                gap={'small'}
-            >
-                {props.elements.map((element, index) =>
-                    <Grid
-                        key={index} className={classes.element}
-                        item xs={12} sm={element.width}
-                    >
-                        <ContentElementWrapper className={classes.element} element={element} />
-                    </Grid>
-                )}
-            </Grid>
-        </Box>
-    );
+    return <Box py={1}>
+        <Grid
+            container
+            spacing={2}
+            direction={'row'}
+            alignItems={'stretch'}
+            justify={'center'}
+            pad={'small'}
+            gap={'small'}
+        >
+            {elements.map((element, index) =>
+                <Grid
+                    key={index} className={classes.element}
+                    item xs={12} sm={element.width}
+                >
+                    <ContentElementWrapper className={classes.element} element={element}/>
+                </Grid>
+            )}
+        </Grid>
+    </Box>;
 }
 
 ContentRow.propTypes = {

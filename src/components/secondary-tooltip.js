@@ -1,5 +1,5 @@
 import React from 'react';
-import {Tooltip, Fade} from '@material-ui/core';
+import {Fade, Tooltip} from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 
@@ -18,15 +18,15 @@ const ModifiedTooltip = withStyles(theme => ({
  * @return {*}
  * @constructor
  */
-export default function SecondaryTooltip(props) {
+export default function SecondaryTooltip({children, title}) {
     return (
         <ModifiedTooltip
-            title={props.title}
+            title={title}
             enterDelay={0}
             TransitionComponent={Fade}
             TransitionProps={{timeout: 600}}
         >
-            {props.children}
+            {children}
         </ModifiedTooltip>
     );
 }

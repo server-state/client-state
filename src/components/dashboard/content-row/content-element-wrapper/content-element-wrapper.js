@@ -16,10 +16,8 @@ import CEWState from './content-element-wrappers.state';
 import {useMachine} from "@xstate/react/lib";
 import CEWErrorBoundary from "./cew-error-boundary";
 
-function ContentElementWrapper(props) {
-    const name = props.element.name;
-    const path = props.element.path;
-    const MyComponent = elementComponents[props.element.component].component;
+function ContentElementWrapper({element: {component, name, path}}) {
+    const CBMComponent = elementComponents[component].component;
 
     const [current, send] = useMachine(CEWState.withContext({
         module: path,
@@ -32,7 +30,7 @@ function ContentElementWrapper(props) {
     switch (current.value) {
         case 'loaded':
             innerContent =
-                MyComponent ? <MyComponent data={current.context.data} minWidth={100}/> : 'undefined';
+                CBMComponent ? <CBMComponent data={current.context.data} minWidth={100}/> : 'undefined';
             break;
         case 'error':
             innerContent =

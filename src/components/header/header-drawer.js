@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function HeaderDrawer(props) {
+function HeaderDrawer({dashboards, dense, onDrawerSelected, selected}) {
     const classes = useStyles();
 
     // disable "swipe to go back" feature on iOS
@@ -26,7 +26,7 @@ function HeaderDrawer(props) {
 
     // simple react state for open/close behaviour
     const [state, setState] = React.useState(false);
-    const toggleDrawer = newState => event => {
+    const getToggleDrawerFunction = newState => event => {
         if (event && 
             event.type === 'keydown' && 
             (event.key === 'Tab' || event.key === 'Shift')) {
@@ -40,18 +40,18 @@ function HeaderDrawer(props) {
         <div
             className={classes.list}
             role="presentation"
-            onClick={toggleDrawer(false)}
-            onKeyDown={toggleDrawer(false)}
+            onClick={getToggleDrawerFunction(false)}
+            onKeyDown={getToggleDrawerFunction(false)}
         >
             <List>
-                {props.dashboards.map(dashboard => (
+                {dashboards.map(dashboard => (
                     <ListItem
                         key={dashboard}
 
                         button
-                        selected={props.selected === dashboard}
-                        dense={props.dense}
-                        onClick={event => props.onDrawerSelected(event.target.textContent)}
+                        selected={selected === dashboard}
+                        dense={dense}
+                        onClick={event => onDrawerSelected(event.target.textContent)}
                     >
                         <ListItemText primary={dashboard} />
                     </ListItem>
@@ -68,7 +68,7 @@ function HeaderDrawer(props) {
                     className={classes.menuButtonLeft}
                     color="inherit"
                     aria-label="menu"
-                    onClick={toggleDrawer(true)}
+                    onClick={getToggleDrawerFunction(true)}
                 >
                     <MenuIcon />
                 </IconButton>
@@ -76,8 +76,8 @@ function HeaderDrawer(props) {
 
             <SwipeableDrawer
                 open={state}
-                onClose={toggleDrawer(false)}
-                onOpen={toggleDrawer(true)}
+                onClose={getToggleDrawerFunction(false)}
+                onOpen={getToggleDrawerFunction(true)}
 
                 disableBackdropTransition={!iOS}
                 disableDiscovery={iOS}

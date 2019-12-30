@@ -16,10 +16,12 @@ const useStyles = makeStyles({
 function RawPretty(props) {
     const classes = useStyles();
 
+    const prettyJSON = JSON.stringify(props.data, null, 2);
+
     return (
         <div className={classes.container}>
             <pre className={classes.node}>
-                {JSON.stringify(props.data, null, 2)}
+                {prettyJSON}
             </pre>
         </div>
     );
