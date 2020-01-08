@@ -1,9 +1,9 @@
 import React from 'react';
-import { ThemeProvider } from '@material-ui/styles';
+import {ThemeProvider} from '@material-ui/styles';
 
 import theme from './theme';
 import Header from './components/header/';
-import Dashboard from "./components/dashboard";
+import Dashboard from "./components/dashboard/dashboard";
 
 
 const defaultConfig = [
@@ -88,19 +88,21 @@ export default class App extends React.Component {
     }
 
     render() {
+        const {dashboards, config} = this.state;
+
         return (
             <ThemeProvider theme={theme}>
                 <Header 
-                    dashboards={this.state.dashboards}
-                    title={this.state.config[0].title}
+                    dashboards={dashboards}
+                    dashboardTitle={config[0].title}
                     dense={false}
                     
-                    onDrawerSelected={(element) => alert(element)}
+                    onDrawerSelected={alert}
                     onToggleEdit={() => console.log('Toggle edit')}
                     onRefresh={() => console.log('Refresh please')}
-                    onMenuSelected={(element) => alert(element)}
+                    onMenuSelected={alert}
                 />
-                <Dashboard config={this.state.config[0]}/>
+                <Dashboard config={config[0]}/>
             </ThemeProvider>
         );
     }

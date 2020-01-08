@@ -11,10 +11,11 @@ const useStyles = makeStyles(({
 
 export default function Raw(props) {
     const classes = useStyles();
+    const prettyJSON = JSON.stringify(props.data, null, 2);
 
     return (
         <Typography variant="body2" className={classes.typo}>
-            {JSON.stringify(props.data, null, 2)}
+            {prettyJSON}
         </Typography>
     );
 }

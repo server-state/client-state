@@ -6,9 +6,9 @@ import RefreshIcon from '@material-ui/icons/Refresh';
 import SecondaryTooltip from '../secondary-tooltip';
 
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
     refreshIcon: {
-        transition: rotate => 
+        transition: rotate =>
             rotate ? 'transform 1s ease' : '',
         transform: rotate =>
             rotate ? 'rotate(360deg)' : ''
@@ -19,7 +19,7 @@ function HeaderRefresh(props) {
     const [rotate, setRotate] = React.useState(false);
     const classes = useStyles(rotate);
 
-    const clicked = () => {
+    const onClick = () => {
         setRotate(true);
         setTimeout(() => setRotate(false), 1000);
         props.onRefresh();
@@ -30,7 +30,7 @@ function HeaderRefresh(props) {
             <IconButton
                 color="inherit"
                 aria-label="none"
-                onClick={clicked}
+                onClick={onClick}
             >
                 <RefreshIcon className={classes.refreshIcon} />
             </IconButton>
@@ -39,6 +39,9 @@ function HeaderRefresh(props) {
 }
 
 HeaderRefresh.propTypes = {
+    /**
+     * Function that gets called when the refresh button gets clicked
+     */
     onRefresh: PropTypes.func.isRequired
 };
 

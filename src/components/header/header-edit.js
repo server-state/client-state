@@ -6,13 +6,13 @@ import ViewQuiltIcon from '@material-ui/icons/ViewQuilt';
 import SecondaryTooltip from '../secondary-tooltip';
 
 
-function HeaderEdit(props) {
+function HeaderEdit({onToggleEdit}) {
     return (
         <SecondaryTooltip title="Edit">
             <IconButton
                 color="inherit"
                 aria-label="none"
-                onClick={props.onToggleEdit}
+                onClick={onToggleEdit}
             >
                 <ViewQuiltIcon />
             </IconButton>
@@ -21,6 +21,9 @@ function HeaderEdit(props) {
 }
 
 HeaderEdit.propTypes = {
+    /**
+     * A callback getting called when editing gets toggled
+     */
     onToggleEdit: PropTypes.func.isRequired
 };
 

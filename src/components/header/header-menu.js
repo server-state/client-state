@@ -5,7 +5,6 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 import SecondaryTooltip from '../secondary-tooltip';
 
-
 // given options
 const options = [
     'Preferences',
@@ -15,7 +14,14 @@ const options = [
 
 const ITEM_HEIGHT = 48;
 
-function HeaderMenu(props) {
+const paperProps = {
+    style: {
+        maxHeight: ITEM_HEIGHT * 4.5,
+        width: 200
+    }
+};
+
+function HeaderMenu({onMenuSelected}) {
     // simple react state for open/close behaviour
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
@@ -27,12 +33,12 @@ function HeaderMenu(props) {
 
     const handleClose = () => {
         setAnchorEl(null);
-    }
+    };
 
     const onClick = event => {
         handleClose();
-        props.onMenuSelected(event.target.textContent);
-    }
+        onMenuSelected(event.target.textContent);
+    };
 
     return (
         <div>
@@ -51,12 +57,7 @@ function HeaderMenu(props) {
                 keepMounted
                 open={open}
                 onClose={handleClose}
-                PaperProps={{
-                    style: {
-                        maxHeight: ITEM_HEIGHT * 4.5,
-                        width: 200
-                    }
-                }}
+                PaperProps={paperProps}
             >
                 {options.map(option => (
                     <MenuItem key={option} onClick={onClick}>
