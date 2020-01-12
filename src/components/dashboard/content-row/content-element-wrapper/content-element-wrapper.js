@@ -16,8 +16,10 @@ import CEWState from './content-element-wrappers.state';
 import {useMachine} from "@xstate/react/lib";
 import CEWErrorBoundary from "./cew-error-boundary";
 
+import parseDynamicCode from './parse-cbm';
+
 function ContentElementWrapper({element: {component, name, path}}) {
-    const CBMComponent = elementComponents[component].component;
+    let CBMComponent;
 
     const [current, send] = useMachine(CEWState.withContext({
         module: path,
@@ -25,6 +27,11 @@ function ContentElementWrapper({element: {component, name, path}}) {
         errorMessage: undefined
     }));
 
+    const cbmData = (parseDynamicCode(`
+"use strict";function e(e){return e&&"object"==typeof e&&"default"in e?e.default:e}var t=e(require("react")),r=e(require("prop-types")),a=require("@material-ui/core");function n(e){return t.createElement("div",null,t.createElement(a.Typography,null,"My CBM module!"),t.createElement(a.Typography,null,"Data: ",JSON.stringify(e.data,null,2)))}n.propTypes={data:r.any.isRequired};var i={component:n,info:{name:"my simple CBM",version:"v0.0.9",description:"This is a template CBM",about:"server-state"}};module.exports=i;
+    `));
+    CBMComponent = cbmData.component;
+    console.log(cbmData.info);
     let innerContent;
 
     switch (current.value) {
@@ -49,6 +56,7 @@ function ContentElementWrapper({element: {component, name, path}}) {
         default:
             innerContent = <LinearProgress/>;
     }
+    // language=JavaScript
     return (
         <Card style={{'height': '100%'}}>
             <CardHeader
@@ -75,6 +83,8 @@ function ContentElementWrapper({element: {component, name, path}}) {
             </CardContent>
         </Card>
     );
+
+
 }
 
 ContentElementWrapper.propTypes = {
