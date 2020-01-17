@@ -27,9 +27,9 @@ function ContentElementWrapper({element: {component, name, path}}) {
         errorMessage: undefined
     }));
 
-    const cbmData = (parseDynamicCode(`
-"use strict";function e(e){return e&&"object"==typeof e&&"default"in e?e.default:e}var t=e(require("react")),r=e(require("prop-types")),a=require("@material-ui/core");function n(e){return t.createElement("div",null,t.createElement(a.Typography,null,"My CBM module!"),t.createElement(a.Typography,null,"Data: ",JSON.stringify(e.data,null,2)))}n.propTypes={data:r.any.isRequired};var i={component:n,info:{name:"my simple CBM",version:"v0.0.9",description:"This is a template CBM",about:"server-state"}};module.exports=i;
-    `));
+    const cbmData = (parseDynamicCode(
+        window.localStorage.getItem('code')
+    ));
     CBMComponent = cbmData.component;
     console.log(cbmData.info);
     let innerContent;
