@@ -8,7 +8,6 @@ import {
     MoreVert as MoreVertIcon
 } from '@material-ui/icons';
 
-import elementComponents from '../../../../config/component-registry';
 import {fullURL} from '../../../../lib/api';
 import ElementAvatar from './element-avatar';
 
@@ -16,22 +15,26 @@ import CEWState from './content-element-wrappers.state';
 import {useMachine} from "@xstate/react/lib";
 import CEWErrorBoundary from "./cew-error-boundary";
 
-import parseDynamicCode from './parse-cbm';
+import useCBMManager from "../../../../lib/cbm-registry/component-registry";
 
 function ContentElementWrapper({element: {component, name, path}}) {
-    let CBMComponent;
+    const {cbms} = useCBMManager();
+    
 
     const [current, send] = useMachine(CEWState.withContext({
         module: path,
         data: undefined,
         errorMessage: undefined
     }));
-
-    const cbmData = (parseDynamicCode(
-        window.localStorage.getItem('code')
-    ));
-    CBMComponent = cbmData.component;
-    console.log(cbmData.info);
+    
+    let CBMComponent;
+    
+    if (!cbms[component]) {
+        send({type: 'ERROR', data: new Error('Component not found')});
+    } else {
+        CBMComponent = cbms[component].component;
+    }
+    
     let innerContent;
 
     switch (current.value) {
