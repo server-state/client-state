@@ -128,6 +128,9 @@ export default class App extends React.Component {
                         <Route path={'/cbm-manager'}>
                             <CBMCard></CBMCard>
                         </Route>
+                        <Route path={'/preferences'}>
+                            Preferences will go here
+                        </Route>
                     </Switch>
                 </Router>
             </ThemeProvider>
