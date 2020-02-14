@@ -15,7 +15,7 @@ import CEWState from './content-element-wrappers.state';
 import {useMachine} from "@xstate/react/lib";
 import CEWErrorBoundary from "./cew-error-boundary";
 
-import useCBMManager from "../../../../lib/cbm-registry/component-registry";
+import useCBMManager from "../../../../lib/cbm-manager/cbm-manager";
 
 function ContentElementWrapper({element: {component, name, path}}) {
     let CBMComponent;
