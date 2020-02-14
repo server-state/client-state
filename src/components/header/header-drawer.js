@@ -2,11 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
     makeStyles, IconButton, SwipeableDrawer,
-    List, ListItem, ListItemText
+    List, ListItem, ListItemText, Link
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 
 import SecondaryTooltip from '../secondary-tooltip';
+
+import {Link as RouterLink, useRouteMatch} from 'react-router-dom';
 
 
 const useStyles = makeStyles(theme => ({
@@ -20,6 +22,7 @@ const useStyles = makeStyles(theme => ({
 
 function HeaderDrawer({dashboards, dense, onDrawerSelected, selected}) {
     const classes = useStyles();
+    const {url} = useRouteMatch();
 
     // disable "swipe to go back" feature on iOS
     const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
@@ -27,8 +30,8 @@ function HeaderDrawer({dashboards, dense, onDrawerSelected, selected}) {
     // simple react state for open/close behaviour
     const [state, setState] = React.useState(false);
     const getToggleDrawerFunction = newState => event => {
-        if (event && 
-            event.type === 'keydown' && 
+        if (event &&
+            event.type === 'keydown' &&
             (event.key === 'Tab' || event.key === 'Shift')) {
             return;
         }
@@ -48,14 +51,24 @@ function HeaderDrawer({dashboards, dense, onDrawerSelected, selected}) {
                     <ListItem
                         key={dashboard}
 
+                        to={`/dashboard/${dashboard}`}
                         button
-                        selected={selected === dashboard}
+                        component={RouterLink}
+                        selected={url === `/dashboard/${dashboard}`}
                         dense={dense}
-                        onClick={event => onDrawerSelected(event.target.textContent)}
                     >
-                        <ListItemText primary={dashboard} />
+                        <ListItemText primary={dashboard}/>
                     </ListItem>
                 ))}
+                <ListItem
+                    button
+                    component={RouterLink}
+                    to={'/cbm-manager'}
+                    selected={url==='/cmb-manager'}
+                    dense={dense}
+                    >
+                    <ListItemText primary={'CBM Manager'} />
+                </ListItem>
             </List>
         </div>
     );
@@ -70,7 +83,7 @@ function HeaderDrawer({dashboards, dense, onDrawerSelected, selected}) {
                     aria-label="menu"
                     onClick={getToggleDrawerFunction(true)}
                 >
-                    <MenuIcon />
+                    <MenuIcon/>
                 </IconButton>
             </SecondaryTooltip>
 
