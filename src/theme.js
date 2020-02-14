@@ -8,7 +8,8 @@ const theme = createMuiTheme({
             dark: blueGrey['500']
         },
         secondary: {
-            main: amber['500']
+            main: amber['500'],
+            text: 'white'
         },
         error: {
             main: deepOrange["A400"],
