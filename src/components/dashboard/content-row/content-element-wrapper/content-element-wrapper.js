@@ -18,16 +18,15 @@ import CEWErrorBoundary from "./cew-error-boundary";
 import useCBMManager from "../../../../lib/cbm-registry/component-registry";
 
 function ContentElementWrapper({element: {component, name, path}}) {
+    let CBMComponent;
+    let innerContent;
     const {cbms} = useCBMManager();
     
-
     const [current, send] = useMachine(CEWState.withContext({
         module: path,
         data: undefined,
         errorMessage: undefined
     }));
-    
-    let CBMComponent;
     
     if (!cbms[component]) {
         send({type: 'ERROR', data: new Error('Component not found')});
@@ -35,8 +34,6 @@ function ContentElementWrapper({element: {component, name, path}}) {
         CBMComponent = cbms[component].component;
     }
     
-    let innerContent;
-
     switch (current.value) {
         case 'loaded':
             innerContent =
@@ -59,7 +56,6 @@ function ContentElementWrapper({element: {component, name, path}}) {
         default:
             innerContent = <LinearProgress/>;
     }
-    // language=JavaScript
     return (
         <Card style={{'height': '100%'}}>
             <CardHeader
@@ -86,8 +82,6 @@ function ContentElementWrapper({element: {component, name, path}}) {
             </CardContent>
         </Card>
     );
-
-
 }
 
 ContentElementWrapper.propTypes = {
