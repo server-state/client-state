@@ -12,6 +12,7 @@ import {
     useParams,
     Switch
 } from 'react-router-dom';
+import CBMGrid from "./components/cbm-manager/cbm-grid";
 
 const defaultConfig = [
     {
@@ -126,7 +127,8 @@ export default class App extends React.Component {
                             
                         </Route>
                         <Route path={'/cbm-manager'}>
-                            <CBMCard></CBMCard>
+                            <CBMGrid query={'a'} />
+                            {/*<CBMCard></CBMCard>*/}
                         </Route>
                         <Route path={'/preferences'}>
                             Preferences will go here

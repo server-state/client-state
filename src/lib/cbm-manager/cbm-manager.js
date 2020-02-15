@@ -1,4 +1,3 @@
-import Raw from '../../components/front-end-modules/raw';
 import parseCode from './parse-cbm';
 
 let raw = [];

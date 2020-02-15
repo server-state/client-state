@@ -10,8 +10,11 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItem from "@material-ui/core/ListItem";
 import List from "@material-ui/core/List";
 import ListItemText from "@material-ui/core/ListItemText";
+import * as registry from '../../lib/cbm-registry-client';
 
 export default function CBMCard() {
+    registry.search();
+    
     return (
         <Card style={{width: 360}}>
             <CardMedia
