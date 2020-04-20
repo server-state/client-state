@@ -42,6 +42,6 @@
     "cypress": "^4.3.0",
     "eslint-plugin-cypress": "^2.10.3",
     "http-server": "^0.12.1",
-    "start-server-and-test": "^1.10.11"
+    "start-server-and-test": "^1.11.0"
   }
 }
