@@ -2,11 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
     makeStyles, IconButton, SwipeableDrawer,
-    List, ListItem, ListItemText
+    List, ListItem, ListItemText, Link
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 
 import SecondaryTooltip from '../secondary-tooltip';
+
+import {Link as RouterLink, useRouteMatch} from 'react-router-dom';
 
 
 const useStyles = makeStyles(theme => ({
@@ -18,17 +20,18 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function HeaderDrawer(props) {
+function HeaderDrawer({dashboards, dense, onDrawerSelected, selected}) {
     const classes = useStyles();
+    const {url} = useRouteMatch();
 
     // disable "swipe to go back" feature on iOS
     const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 
     // simple react state for open/close behaviour
     const [state, setState] = React.useState(false);
-    const toggleDrawer = newState => event => {
-        if (event && 
-            event.type === 'keydown' && 
+    const getToggleDrawerFunction = newState => event => {
+        if (event &&
+            event.type === 'keydown' &&
             (event.key === 'Tab' || event.key === 'Shift')) {
             return;
         }
@@ -40,22 +43,32 @@ function HeaderDrawer(props) {
         <div
             className={classes.list}
             role="presentation"
-            onClick={toggleDrawer(false)}
-            onKeyDown={toggleDrawer(false)}
+            onClick={getToggleDrawerFunction(false)}
+            onKeyDown={getToggleDrawerFunction(false)}
         >
             <List>
-                {props.dashboards.map(dashboard => (
+                {dashboards.map(dashboard => (
                     <ListItem
                         key={dashboard}
 
+                        to={`/dashboard/${dashboard}`}
                         button
-                        selected={props.selected === dashboard}
-                        dense={props.dense}
-                        onClick={event => props.onDrawerSelected(event.target.textContent)}
+                        component={RouterLink}
+                        selected={url === `/dashboard/${dashboard}`}
+                        dense={dense}
                     >
-                        <ListItemText primary={dashboard} />
+                        <ListItemText primary={dashboard}/>
                     </ListItem>
                 ))}
+                <ListItem
+                    button
+                    component={RouterLink}
+                    to={'/cbm-manager'}
+                    selected={url==='/cmb-manager'}
+                    dense={dense}
+                    >
+                    <ListItemText primary={'CBM Manager'} />
+                </ListItem>
             </List>
         </div>
     );
@@ -68,16 +81,16 @@ function HeaderDrawer(props) {
                     className={classes.menuButtonLeft}
                     color="inherit"
                     aria-label="menu"
-                    onClick={toggleDrawer(true)}
+                    onClick={getToggleDrawerFunction(true)}
                 >
-                    <MenuIcon />
+                    <MenuIcon/>
                 </IconButton>
             </SecondaryTooltip>
 
             <SwipeableDrawer
                 open={state}
-                onClose={toggleDrawer(false)}
-                onOpen={toggleDrawer(true)}
+                onClose={getToggleDrawerFunction(false)}
+                onOpen={getToggleDrawerFunction(true)}
 
                 disableBackdropTransition={!iOS}
                 disableDiscovery={iOS}

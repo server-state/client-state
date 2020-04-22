@@ -1,10 +1,18 @@
 import React from 'react';
-import { ThemeProvider } from '@material-ui/styles';
+import {ThemeProvider} from '@material-ui/core/styles';
 
 import theme from './theme';
 import Header from './components/header/';
-import Dashboard from "./components/dashboard";
+import Dashboard from "./components/dashboard/dashboard";
+import CBMCard from "./components/cbm-manager/cbm-card";
 
+import {
+    BrowserRouter as Router,
+    Route,
+    useParams,
+    Switch
+} from 'react-router-dom';
+import CBMGrid from "./components/cbm-manager/cbm-grid";
 
 const defaultConfig = [
     {
@@ -88,19 +96,45 @@ export default class App extends React.Component {
     }
 
     render() {
+        const {dashboards, config} = this.state;
+        
+        function DashboardRoute(props) {
+            const params = useParams();
+            const dashboard = props.config.find(db => db.title === params.dashboardKey);
+            
+            return <div>
+                {dashboard ? <Dashboard config={dashboard}/> : 'Not found'}
+            </div>
+        }
+
         return (
             <ThemeProvider theme={theme}>
-                <Header 
-                    dashboards={this.state.dashboards}
-                    title={this.state.config[0].title}
-                    dense={false}
-                    
-                    onDrawerSelected={(element) => alert(element)}
-                    onToggleEdit={() => console.log('Toggle edit')}
-                    onRefresh={() => console.log('Refresh please')}
-                    onMenuSelected={(element) => alert(element)}
-                />
-                <Dashboard config={this.state.config[0]}/>
+                <Router>
+                    <Header
+                        dashboards={dashboards}
+                        dashboardTitle={config[0].title}
+                        dense={false}
+
+                        onDrawerSelected={alert}
+                        onToggleEdit={() => console.log('Toggle edit')}
+                        onRefresh={() => console.log('Refresh please')}
+                        onMenuSelected={alert}
+                    />
+                    {/*<CBMCard></CBMCard>*/}
+                    <Switch>
+                        <Route path={'/dashboard/:dashboardKey'}>
+                            <DashboardRoute config={config} />
+                            
+                        </Route>
+                        <Route path={'/cbm-manager'}>
+                            <CBMGrid query={'a'} />
+                            {/*<CBMCard></CBMCard>*/}
+                        </Route>
+                        <Route path={'/preferences'}>
+                            Preferences will go here
+                        </Route>
+                    </Switch>
+                </Router>
             </ThemeProvider>
         );
     }
