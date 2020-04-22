@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import {cbmDetails} from '../../lib/cbm-registry-client';
+import {femDetails} from '../../lib/fem-registry-client';
 
-export default function CBMOverview(props) {
+export default function FEMOverview(props) {
     const [details, setDetails] = useState(null);
 
     if (!details)
-        cbmDetails(props.cbmId).then(res => setDetails(res));
+        femDetails(props.femId).then(res => setDetails(res));
 
     if (details) {
         return <>
@@ -19,6 +19,6 @@ export default function CBMOverview(props) {
     }
 }
 
-CBMOverview.propTypes = {
-    cbmId: PropTypes.number.isRequired
+FEMOverview.propTypes = {
+    femId: PropTypes.number.isRequired
 };

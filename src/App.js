@@ -4,7 +4,7 @@ import {ThemeProvider} from '@material-ui/core/styles';
 import theme from './theme';
 import Header from './components/header/';
 import Dashboard from "./components/dashboard/dashboard";
-import CBMCard from "./components/cbm-manager/cbm-card";
+import FEMCard from "./components/fem-manager/fem-card";
 
 import {
     BrowserRouter as Router,
@@ -12,7 +12,7 @@ import {
     useParams,
     Switch
 } from 'react-router-dom';
-import CBMGrid from "./components/cbm-manager/cbm-grid";
+import FEMGrid from "./components/fem-manager/fem-grid";
 
 const defaultConfig = [
     {
@@ -97,11 +97,11 @@ export default class App extends React.Component {
 
     render() {
         const {dashboards, config} = this.state;
-        
+
         function DashboardRoute(props) {
             const params = useParams();
             const dashboard = props.config.find(db => db.title === params.dashboardKey);
-            
+
             return <div>
                 {dashboard ? <Dashboard config={dashboard}/> : 'Not found'}
             </div>
@@ -120,15 +120,15 @@ export default class App extends React.Component {
                         onRefresh={() => console.log('Refresh please')}
                         onMenuSelected={alert}
                     />
-                    {/*<CBMCard></CBMCard>*/}
+                    {/*<FEMCard></FEMCard>*/}
                     <Switch>
                         <Route path={'/dashboard/:dashboardKey'}>
                             <DashboardRoute config={config} />
-                            
+
                         </Route>
-                        <Route path={'/cbm-manager'}>
-                            <CBMGrid query={'a'} />
-                            {/*<CBMCard></CBMCard>*/}
+                        <Route path={'/fem-manager'}>
+                            <FEMGrid query={'a'} />
+                            {/*<FEMCard></FEMCard>*/}
                         </Route>
                         <Route path={'/preferences'}>
                             Preferences will go here

@@ -15,29 +15,29 @@ import CEWState from './content-element-wrappers.state';
 import {useMachine} from "@xstate/react/lib";
 import CEWErrorBoundary from "./cew-error-boundary";
 
-import useCBMManager from "../../../../lib/cbm-manager/cbm-manager";
+import useFEMManager from "../../../../lib/fem-manager/fem-manager";
 
 function ContentElementWrapper({element: {component, name, path}}) {
-    let CBMComponent;
+    let FEMComponent;
     let innerContent;
-    const {cbms} = useCBMManager();
-    
+    const {fems} = useFEMManager();
+
     const [current, send] = useMachine(CEWState.withContext({
         module: path,
         data: undefined,
         errorMessage: undefined
     }));
-    
-    if (!cbms[component]) {
+
+    if (!fems[component]) {
         send({type: 'ERROR', data: new Error('Component not found')});
     } else {
-        CBMComponent = cbms[component].component;
+        FEMComponent = fems[component].component;
     }
-    
+
     switch (current.value) {
         case 'loaded':
             innerContent =
-                CBMComponent ? <CBMComponent data={current.context.data} minWidth={100}/> : 'undefined';
+                FEMComponent ? <FEMComponent data={current.context.data} minWidth={100}/> : 'undefined';
             break;
         case 'error':
             innerContent =

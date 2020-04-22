@@ -1,5 +1,5 @@
 /*
-systemd cbm status-codes:
+systemd fem status-codes:
 (priority from top to bottom)
 
     [status name]   [ThemeType]         [case select]
@@ -28,17 +28,17 @@ Run "systemctl --state=help" for more information.
 export function getStatus(unitLoadState, unitFileState, activeState) {
     if (!unitLoadState || typeof unitLoadState !== 'string')
         return 'no-information';
-    
+
     if (unitLoadState !== 'loaded')
         return unitLoadState;
-    
+
     if (!activeState || typeof activeState !== 'string')
         return 'no-information';
 
     if (activeState === 'inactive') {
         if (!unitFileState || typeof unitFileState  !== 'string')
             return 'no-information-by-file';
-        
+
         if (unitFileState === "enabled")
             return "not-activating"
         else

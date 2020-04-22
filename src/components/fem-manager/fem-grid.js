@@ -1,22 +1,22 @@
 import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
-import {search} from '../../lib/cbm-registry-client';
-import CBMOverview from "./cbm-overview";
+import {search} from '../../lib/fem-registry-client';
+import FEMOverview from "./fem-overview";
 import Axios from 'axios';
 
-export default function CBMGrid(props) {
-    const [cbms, setCbms] = useState(/*[1,1,1]*/null);
+export default function FEMGrid(props) {
+    const [fems, setCbms] = useState(/*[1,1,1]*/null);
 
-    if (!cbms) {
+    if (!fems) {
         search(props.query).then(res => setCbms(res));
     }
-        
-    if (cbms) {
-        if (cbms.length < 1) {
+
+    if (fems) {
+        if (fems.length < 1) {
             return <p>None found</p>
         } else {
             return <>
-                {cbms.map(cbmId => <CBMOverview cbmId={cbmId}/>)}
+                {fems.map(femId => <FEMOverview femId={femId}/>)}
             </>
         }
     } else {
@@ -24,11 +24,11 @@ export default function CBMGrid(props) {
     }
 }
 
-CBMGrid.propTypes = {
+FEMGrid.propTypes = {
     query: PropTypes.string
 };
 
-CBMGrid.defaultProps = {
+FEMGrid.defaultProps = {
     query: ''
 };
 

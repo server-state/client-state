@@ -3,13 +3,13 @@ import Axios from "axios";
 const base = 'http://localhost:3000';
 
 /**
- * Search for CBMs
+ * Search for FEMs
  * @param {string} [query=''] The search query
  * @param {number} [page=1] The page
  * @returns {Promise<number[]>}
  */
 export async function search(query = '', page = 1) {
-    return (await Axios.get(`${base}/api/cbm`, {
+    return (await Axios.get(`${base}/api/fem`, {
         params: {
             q: query,
             p: page
@@ -19,12 +19,12 @@ export async function search(query = '', page = 1) {
 }
 
 /**
- * Fetch the details about a CBM
- * @param {number} cbmId
+ * Fetch the details about a FEM
+ * @param {number} femId
  * @returns {Promise<*>}
  */
-export async function cbmDetails(cbmId) {
-    return (await Axios.get(`${base}/api/cbm/${cbmId}`, {responseType: 'json'})).data;
+export async function femDetails(femId) {
+    return (await Axios.get(`${base}/api/fem/${femId}`, {responseType: 'json'})).data;
 }
 
 /**

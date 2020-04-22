@@ -63,11 +63,11 @@ function HeaderDrawer({dashboards, dense, onDrawerSelected, selected}) {
                 <ListItem
                     button
                     component={RouterLink}
-                    to={'/cbm-manager'}
+                    to={'/fem-manager'}
                     selected={url==='/cmb-manager'}
                     dense={dense}
                     >
-                    <ListItemText primary={'CBM Manager'} />
+                    <ListItemText primary={'FEM Manager'} />
                 </ListItem>
             </List>
         </div>
