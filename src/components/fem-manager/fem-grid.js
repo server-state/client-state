@@ -1,8 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {search} from '../../lib/fem-registry-client';
 import FEMOverview from "./fem-overview";
-import Axios from 'axios';
 
 export default function FEMGrid(props) {
     const [fems, setCbms] = useState(/*[1,1,1]*/null);

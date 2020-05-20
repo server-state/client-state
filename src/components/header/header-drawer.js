@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
     makeStyles, IconButton, SwipeableDrawer,
-    List, ListItem, ListItemText, Link
+    List, ListItem, ListItemText
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 
