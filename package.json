@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "cypress": "^4.3.0",
-    "eslint-plugin-cypress": "^2.10.3",
+    "eslint-plugin-cypress": "^2.11.1",
     "http-server": "^0.12.3",
     "start-server-and-test": "^1.10.11"
   }
