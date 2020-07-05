@@ -18,17 +18,18 @@
 .env.test.local
 .env.production.local
 
+# logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
 # eslint cache
--eslintcache
+.eslintcache
 
 # IDE configurations
 .idea
 .vscode
 
-# Cypress ignores
+# Cypress output
 cypress/videos
 cypress/screenshots
