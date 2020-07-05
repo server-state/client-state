@@ -1,80 +1,54 @@
 {
-    "name": "web-client",
-    "version": "0.0.9",
-    "private": true,
-    "dependencies": {
-        "react": "^16.13.1",
-        "react-dom": "^16.13.1"
-    },
-    "devDependencies": {
-        "@testing-library/jest-dom": "^4.2.4",
-        "@testing-library/react": "^9.3.2",
-        "@testing-library/user-event": "^7.1.2",
-        "@types/jest": "^24.0.0",
-        "@types/node": "^12.0.0",
-        "@types/react": "^16.9.0",
-        "@types/react-dom": "^16.9.0",
-        "@typescript-eslint/eslint-plugin": "^3.5.0",
-        "@typescript-eslint/parser": "^3.5.0",
-        "eslint": "^7.3.1",
-        "eslint-config-prettier": "^6.11.0",
-        "eslint-plugin-eslint-comments": "^3.2.0",
-        "eslint-plugin-import": "^2.22.0",
-        "eslint-plugin-jest": "^23.17.1",
-        "eslint-plugin-react": "^7.20.3",
-        "husky": "^4.2.5",
-        "jest": "^26.1.0",
-        "lint-staged": "^10.2.11",
-        "prettier": "2.0.5",
-        "react-scripts": "3.4.1",
-        "typescript": "~3.7.2"
-    },
-    "scripts": {
-        "start": "react-scripts start",
-        "build": "react-scripts build",
-        "test": "react-scripts test",
-        "eject": "react-scripts eject",
-        "lint": "npm run lint:eslint && npm run lint:prettier",
-        "lint:eslint": "npm run eslint",
-        "lint:prettier": "npm run --silent prettier -- --list-different",
-        "fix": "npm run fix:eslint && npm run fix:prettier",
-        "fix:eslint": "npm run eslint -- --fix",
-        "fix:prettier": "npm run prettier -- --write",
-        "eslint": "eslint . --cache --ext .js,.jsx,.ts,.tsx",
-        "prettier": "prettier --ignore-path .eslintignore \"{,!(node_modules)/**/}*.{js,ts,tsx,json,css,html,md,yml}\""
-    },
-    "eslintConfig": {
-        "extends": "react-app"
-    },
-    "browserslist": {
-        "production": [
-            ">0.2%",
-            "not dead",
-            "not op_mini all"
-        ],
-        "development": [
-            "last 1 chrome version",
-            "last 1 firefox version",
-            "last 1 safari version"
-        ]
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "npm run lint"
-        }
-    },
-    "lint-staged": {
-        "*.{js,jsx,ts,tsx}": [
-            "eslint --cache --fix"
-        ],
-        "{*.json,.{babelrc,eslintrc,prettierrc}}": [
-            "prettier --ignore-path .eslintignore --parser json --write"
-        ],
-        "*.{css}": [
-            "prettier --ignore-path .eslintignore --write"
-        ],
-        "*.{html,md,yml}": [
-            "prettier --ignore-path .eslintignore --write"
-        ]
+  "name": "web-client",
+  "version": "0.0.9",
+  "private": true,
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "@types/jest": "^24.0.0",
+    "@types/node": "^12.0.0",
+    "@types/react": "^16.9.0",
+    "@types/react-dom": "^16.9.0",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
+    "prettier": "2.0.5",
+    "react-scripts": "3.4.1",
+    "typescript": "~3.7.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "prettier": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,html,md,yml}\""
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
     }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,html,md,yml}": [
+      "prettier --write"
+    ]
+  }
 }
