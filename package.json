@@ -11,7 +11,7 @@
     "prop-types": "^15.7.2",
     "react-router-dom": "^5.1.2",
     "sval": "^0.4.6",
-    "xstate": "^4.11.0",
+    "xstate": "^4.12.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1"
