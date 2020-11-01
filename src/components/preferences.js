@@ -4,7 +4,7 @@ import React from 'react';
 export default function PreferencesPopup(props) {
     return (
         <>
-            {props.open &&
+            /*{props.open &&
             <Layer
                 onEsc={() => props.onClose()}
                 onClickOutside={() => props.onClose()}
@@ -20,7 +20,7 @@ export default function PreferencesPopup(props) {
                     </Form>
                 </Box>
             </Layer>
-            }
+            }*/
         </>
     )
 }
